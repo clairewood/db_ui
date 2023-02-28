@@ -49,7 +49,7 @@ If you see an Items table below, then we are connected to the DB. </p>
 {{!-- Form to add a record to the table using AJAX  --}}
 <h2>Adding Data with HTML form</h2>
 <p>To add a new Item, please enter its information below and click 'Submit'!</p>
-<form id="add-item-form" method="POST" action="add-item-form">
+<form id="add-item-form" method="POST" action="/add-item-form">
     <label for="input-supplier_id">Supplier ID: </label>
     <input type="text" name="input-supplier_id" id="input-supplier_id">
     <!-- TODO make these dropdown menus --> 
@@ -64,7 +64,7 @@ If you see an Items table below, then we are connected to the DB. </p>
     <input type="text" name="input-in_stock" id="input-in_stock">
 
     <label for="input-qty_on_hand">Current quantity: </label>
-    <input type="text" name="input_qty_on_hand" id="input_qty_on_hand">
+    <input type="text" name="input-qty_on_hand" id="input-qty_on_hand">
 
     <label for="input-price">Price: </label>
     <input type="text" name="input-price" id="input-price">
