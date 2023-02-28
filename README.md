@@ -8,7 +8,7 @@ LINK to web page: http://flip3.engr.oregonstate.edu:9167/ <br>
 Link to professor-provided walkthrough of this process: <br>
 https://github.com/osu-cs340-ecampus/nodejs-starter-app 
 
-Link to specific part in the tutorial I'm struggling with: <br>
+Link to specific part in the tutorial I'm stuck on: <br>
 https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%205%20-%20Adding%20New%20Data 
 
 
@@ -18,9 +18,10 @@ To load the database with a file: <br>
 
 
 TO DO:
-- fix bug that won't add new row to Items table based on form input
+- fix bug that won't let me add new row to Items table based on form input
+
+BEFORE SUBMITTING:
 - drop diagnostic table from DB
-- add .gitignore to project root
 - test that "forever" works 
 - turn some form inputs into dropdown menus
 - make sure every file has a source citation
