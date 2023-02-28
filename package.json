@@ -1,0 +1,18 @@
+{
+    "name": "db_ui",
+    "version": "1.0.0",
+    "description": "",
+    "main": "app.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "node app.js"
+    },
+    "author": "Claire Woodford",
+    "license": "ISC",
+    "dependencies": {
+        "express": "^4.18.2",
+        "express-handlebars": "^6.0.7",
+        "forever": "^4.0.3",
+        "mysql": "^2.18.1"
+    }
+}

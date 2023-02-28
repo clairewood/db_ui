@@ -1,0 +1,76 @@
+<!-- index.hbs -->
+<h1>Server is Running </h1>
+<p>If you see this text, the server is working. <br> 
+If you see an Items table below, then we are connected to the DB. </p> 
+
+
+
+
+
+{{!-- Create a table --}}
+<table id="items-table">
+
+    {{!-- Header section --}}
+    <thead>
+
+        {{!-- For just the first row, we print each key of the row object as a header cell so we
+        know what each column means when the page renders --}}
+        <tr>
+            {{#each data.[0]}}
+            <th>
+                {{@key}}
+            </th>
+            {{/each}}
+        </tr>
+    </thead>
+
+    {{!-- Body section --}}
+    <tbody>
+
+        {{!-- For each row, print the id, fname, lname, homeworld and age, in order --}}
+        {{#each data}}
+        <tr>
+            <td>{{this.item_id}}</td>
+            <td>{{this.supplier_id}}</td>
+            <td>{{this.material_id}}</td>
+            <td>{{this.color_id}}</td>
+            <td>{{this.in_stock}}</td>
+            <td>{{this.qty_on_hand}}</td>
+            <td>{{this.price}}</td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+
+{{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
+<script src="./js/add_item.js"></script>
+
+{{!-- Form to add a record to the table using AJAX  --}}
+<h2>Adding Data with HTML form</h2>
+<p>To add a new Item, please enter its information below and click 'Submit'!</p>
+<form id="add-item-form" method="POST" action="add-item-form">
+    <label for="input-supplier_id">Supplier ID: </label>
+    <input type="text" name="input-supplier_id" id="input-supplier_id">
+    <!-- TODO make these dropdown menus --> 
+    
+    <label for="input-material_id">Material ID: </label>
+    <input type="text" name="input-material_id" id="input-material_id">
+
+    <label for="input-color_id">Color ID: </label>
+    <input type="text" name="input-color_id" id="input-color_id">
+
+    <label for="input-in_stock">In stock? </label>
+    <input type="text" name="input-in_stock" id="input-in_stock">
+
+    <label for="input-qty_on_hand">Current quantity: </label>
+    <input type="text" name="input_qty_on_hand" id="input_qty_on_hand">
+
+    <label for="input-price">Price: </label>
+    <input type="text" name="input-price" id="input-price">
+
+    <input type="submit">
+
+</form>
+
+
