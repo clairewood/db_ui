@@ -70,7 +70,7 @@ app.post('/add-item-form', function(req, res){
     }
 
     // Create the query and run it on the database
-    query1 = `INSERT INTO Items (supplier_id, material_id, color_id, in_stock, qty_on_hand, price) VALUES (${supplier_id}, ${data['input-material_id']}, ${data['input-color_id']}, ${in_stock}, ${qty_on_hand}, ${price})`;
+    query1 = `INSERT INTO Items (supplier_id, material_id, color_id, in_stock, qty_on_hand, price) VALUES (${supplier_id}, '${data['input-material_id']}', '${data['input-color_id']}', ${in_stock}, ${qty_on_hand}, ${price})`;
     db.pool.query(query1, function(error, rows, fields){ 
 
         // Check to see if there was an error
