@@ -26,6 +26,7 @@ app.set('view engine', '.hbs');                 // Tell express to use the handl
 // Static files
 app.use(express.static('public')) 
 
+
 /*
     ROUTES
 */
