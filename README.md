@@ -11,6 +11,8 @@ https://github.com/osu-cs340-ecampus/nodejs-starter-app
 Link to specific part in the tutorial I'm stuck on: <br>
 https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%205%20-%20Adding%20New%20Data 
 
+If getting errors when trying to use node in flip servers, run this: <br>
+ --> nvm install 16.0.0 
 
 To load the database with a file: <br>
  - add the source SQL file to database folder <br>
