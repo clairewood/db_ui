@@ -19,12 +19,15 @@ To load the database with a file: <br>
  - in MariaDB, run: source ./database/filename.sql;
 
 
-TO DO:
-- fix bug that won't let me add new row to Items table based on form input
+TO DO: <br>
+- add UPDATE to app.js <br>
+- add DELETE to app.js<br>
+- add all other tables (do not have to have CRUD capabilities)<br>
 
-BEFORE SUBMITTING:
-- drop diagnostic table from DB
-- test that "forever" works 
-- turn some form inputs into dropdown menus
-- make sure every file has a source citation
-
+BEFORE SUBMITTING: <br>
+- drop diagnostic table from DB <br>
+- test that "forever" works <br>
+- turn some form inputs into dropdown menus <br>
+- make sure every file has a source citation <br>
+- figure out why auto incremented ID in Items is doing weird stuff <br>
+- delete add_item.js from public folder if we end up sticking with form submittal method <br>
