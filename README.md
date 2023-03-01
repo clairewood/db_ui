@@ -18,6 +18,7 @@ TO DO: <br>
 - add UPDATE to app.js <br>
 - add DELETE to app.js<br>
 - add all other tables (do not have to have CRUD capabilities)<br>
+- Update app.js with the backend from the end of step 8
 
 BEFORE SUBMITTING: <br>
 - drop diagnostic table from DB <br>

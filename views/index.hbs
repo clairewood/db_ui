@@ -4,7 +4,7 @@
 If you see an Items table below, then we are connected to the DB. </p> 
 
 
-
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
 
 {{!-- Create a table --}}
@@ -22,6 +22,7 @@ If you see an Items table below, then we are connected to the DB. </p>
                 {{@key}}
             </th>
             {{/each}}
+            <th>delete</th>
         </tr>
     </thead>
 
@@ -30,7 +31,7 @@ If you see an Items table below, then we are connected to the DB. </p>
 
         {{!-- For each row, print the id, fname, lname, homeworld and age, in order --}}
         {{#each data}}
-        <tr>
+        <tr data-value={{this.item_id}}>
             <td>{{this.item_id}}</td>
             <td>{{this.supplier_id}}</td>
             <td>{{this.material_id}}</td>
@@ -38,10 +39,12 @@ If you see an Items table below, then we are connected to the DB. </p>
             <td>{{this.in_stock}}</td>
             <td>{{this.qty_on_hand}}</td>
             <td>{{this.price}}</td>
+            <td><button onclick="deleteItem({{this.item_id}})">Delete</button></td>
         </tr>
         {{/each}}
     </tbody>
 </table>
+<script src="./js/delete_item.js"></script>
 
 {{!-- Search --}}
 <h2>Search Using an HTML Form</h2>
@@ -87,4 +90,34 @@ If you see an Items table below, then we are connected to the DB. </p>
 
 
 
+<h2>Updating an item form</h2>
+<p>To update a specific item select it</p>
+<form id="update-item-form-ajax">
+    <label for="input-item_id">Item ID: </label>
+    <select name="input-item_id" id="mySelect">
+        <option value="test">Select an Item</option>
+        {{#each data}}
+        <option value="{{this.item_id}}">{{this.item_id}}</option>
+        {{/each}}
+    </select>
+    <label for="input-supplier_id">Supplier ID: </label>
+    <input type="text" name="input-supplier_id" id="input-supplier_id">
 
+    <label for="input-material_id">Material ID: </label>
+    <input type="text" name="input-material_id" id="input-material_id">
+
+    <label for="input-color_id">Color ID: </label>
+    <input type="text" name="input-color_id" id="input-color_id">
+
+    <label for="input-in_stock">In stock? </label>
+    <input type="text" name="input-in_stock" id="input-in_stock">
+
+    <label for="input-qty_on_hand">Current quantity: </label>
+    <input type="text" name="input-qty_on_hand" id="input-qty_on_hand">
+
+    <label for="input-price">Price: </label>
+    <input type="text" name="input-price" id="input-price">
+
+    <input type="submit">
+</form>
+<script src="./js/update_person.js"></script>
