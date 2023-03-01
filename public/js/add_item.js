@@ -93,6 +93,8 @@ addRowToTable = (data) => {
     let quantityCell = document.createElement("TD");
     let priceCell = document.createElement("TD");
 
+    let deleteCell = document.createElement("TD");
+
 
     // Fill the cells with correct data
     idCell.innerText = newRow.item_id;
@@ -102,6 +104,12 @@ addRowToTable = (data) => {
     instockCell.innerText = newRow.in_stock;
     quantityCell.innerText = newRow.qty_on_hand;
     priceCell.innerText = newRow.price;
+
+    deleteCell = document.createElement("button");
+    deleteCell.innerHTML = "Delete";
+    deleteCell.onclick = function(){
+        deleteItem(newRow.id);
+    };
   
 
     // Add the cells to the row 
@@ -112,7 +120,21 @@ addRowToTable = (data) => {
     row.appendChild(instockCell);
     row.appendChild(quantityCell);
     row.appendChild(priceCell);
-    
+    row.appenndChild(deleteCell);
+
+    // Add a row attribute so the deleteRow function can find a newly added row
+    row.setAttribute('data-value', newRow.id);
+
     // Add the row to the table
     currentTable.appendChild(row);
+
+    // Start of new Step 8 code for adding new data to the dropdown menu for updating people
+    
+    // Find drop down menu, create a new option, fill data in the option (full name, id),
+    // then append option to drop down menu so newly created rows via ajax will be found in it without needing a refresh
+    let selectMenu = document.getElementById("mySelect");
+    let option = document.createElement("option");
+    option.value = newRow.id;
+    selectMenu.add(option);
+    // End of new step 8 code.
 }
