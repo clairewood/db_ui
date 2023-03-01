@@ -9,12 +9,13 @@ If you see an Items table below, then we are connected to the DB. </p>
 
 {{!-- Create a table --}}
 <table id="items-table">
-    
     {{!-- Header section --}}
     <thead>
-
         {{!-- For just the first row, we print each key of the row object as a header cell so we
         know what each column means when the page renders --}}
+        {{#each css}}
+            <link rel="stylesheet" href="/css{{this}}">
+        {{/each}}
         <tr>
             {{#each data.[0]}}
             <th>
@@ -42,17 +43,30 @@ If you see an Items table below, then we are connected to the DB. </p>
     </tbody>
 </table>
 
+{{!-- Search --}}
+<h2>Search Using an HTML Form</h2>
+<p>Search by material ID</p>
+<form id="search-item-html" method='GET' action='/'>
+    <label for="input-material_id">Search by Material: </label>
+    <input type="text" name="material_id" id="input-material_id-html-search">
+    
+    <input type="submit">
+    <a href='/'><button>Reset</button></a>
+</form>
 
-{{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
-{{!--<script src="./js/add_item.js"></script>--}} 
 
 {{!-- Form to add a record to the table using standard HTML forms --}}
 <h2>Adding Data using an HTML form</h2>
 <p>To add a new Item, please enter its information below and click 'Submit'!</p>
 <form id="add-item-form" method="POST" action="/add-item-form">
     <label for="input-supplier_id">Supplier ID: </label>
-    <input type="text" name="input-supplier_id" id="input-supplier_id">
-    <!-- TODO make these dropdown menus --> 
+    <!-- <input type="text" name="input-supplier_id" id="input-supplier_id">--> 
+    <select name="input-supplier" id="input-supplier-html">
+        <option value="">Select a Supplier</option>
+        {{#each suppliers}}
+        <option value="{{this.id}}">{{this.supplier_name}}</option>
+        {{/each}}
+    </select>
     
     <label for="input-material_id">Material ID: </label>
     <input type="text" name="input-material_id" id="input-material_id">
@@ -71,6 +85,6 @@ If you see an Items table below, then we are connected to the DB. </p>
 
     <input type="submit">
 
-</form>
+
 
 

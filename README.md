@@ -1,15 +1,11 @@
 # db_ui
 
-Database UI for Intro the Databases class. 
+Database UI for Intro the Databases class. <br>
+
+This project was based on a walkthrough provided by our professor and the TAs for the Intro to Databases class, located here: https://github.com/osu-cs340-ecampus/nodejs-starter-app <br>
 
 LINK to web page: http://flip3.engr.oregonstate.edu:9168/ <br>
-(Unless forever stopped working in node)
-
-Link to professor-provided walkthrough of this process: <br>
-https://github.com/osu-cs340-ecampus/nodejs-starter-app 
-
-Link to specific part in the tutorial I'm stuck on: <br>
-https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%205%20-%20Adding%20New%20Data 
+(Unless forever stopped working in node)<br>
 
 If getting errors when trying to use node in flip servers, run this: <br>
  --> nvm install 16.0.0 
@@ -17,7 +13,6 @@ If getting errors when trying to use node in flip servers, run this: <br>
 To load the database with a file: <br>
  - add the source SQL file to database folder <br>
  - in MariaDB, run: source ./database/filename.sql;
-
 
 TO DO: <br>
 - add UPDATE to app.js <br>
