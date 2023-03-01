@@ -48,22 +48,23 @@ app.post('/add-item-form', function(req, res){
     let data = req.body;
 
     // Capture NULL values
-    let qty_on_hand = parseInt(data['qty_on_hand']);
+    let qty_on_hand = parseInt(data['input-qty_on_hand']);
+    console.log(qty_on_hand)
     if (isNaN(qty_on_hand))
     {
         qty_on_hand = 'NULL'
     }
-    let price = parseInt(data['price']);
+    let price = parseInt(data['input-price']);
     if (isNaN(price))
     {
         price = 'NULL'
     }
-    let supplier_id = parseInt(data['supplier_id']);
+    let supplier_id = parseInt(data['input-supplier_id']);
     if (isNaN(supplier_id))
     {
         supplier_id = 'NULL'
     }
-    let in_stock = parseInt(data['in_stock']);
+    let in_stock = parseInt(data['input-in_stock']);
     if (isNaN(in_stock))
     {
         in_stock = 'NULL'
