@@ -12,7 +12,7 @@ var app = express();
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 
-PORT = 9169;
+PORT = 9168;
 
 // Database
 var db = require('./database/db-connector');
@@ -82,8 +82,10 @@ app.get('/', function(req, res)
 
                 return res.render('index', {data: items, suppliers: suppliers});
             })
-        }
-    )});
+        })
+});
+
+
 
 // POST
 app.post('/add-item-form', function(req, res){

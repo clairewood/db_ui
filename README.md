@@ -21,6 +21,7 @@ TO DO: <br>
 - Update app.js with the backend from the end of step 8
 
 BEFORE SUBMITTING: <br>
+- change port to 9168 because that's where forever is running <br>
 - drop diagnostic table from DB <br>
 - test that "forever" works <br>
 - turn some form inputs into dropdown menus <br>
