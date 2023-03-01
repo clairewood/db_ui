@@ -20,13 +20,10 @@ var db = require('./database/db-connector');
 // Handlebars
 const { engine } = require('express-handlebars');
 var exphbs = require('express-handlebars');     // Import express-handlebars
-const { query } = require('express');
 app.engine('.hbs', engine({extname: ".hbs"}));  // Create an instance of the handlebars engine to process templates
 app.set('view engine', '.hbs');                 // Tell express to use the handlebars engine whenever it encounters a *.hbs file.
 
 // Static files
-app.use(express.json())
-app.use(express.urlencoded({extended: true}))
 app.use(express.static('public')) 
 
 
@@ -37,55 +34,13 @@ app.use(express.static('public'))
 // GET
 app.get('/', function(req, res)
     {  
-        // Declare Query 1
-        let query1;
+        let query1 = "SELECT * FROM Items;";               // Define our query
 
-        // If there is no query string, we just perform a basic SELECT
-        if (req.query.material_id === undefined)
-        {
-            query1 = "SELECT * FROM Items;";
-        }
-        else 
-        {
-            query1 = `SELECT * FROM Items where material_id like "${req.query.material_id}%"`
-        }
-    
-        // Query 2 is the same in both cases
-        let query2 = "SELECT * FROM Suppliers;";
-    
-        // Run the 1st query
-        db.pool.query(query1, function(error, rows, fields){
-            
-            // Save the people (people = items)
-            let items = rows;
-            
-            // Run the second query
-            db.pool.query(query2, (error, rows, fields) => {
-                
-                // Save the planets (planets = suppliers)
-                let suppliers = rows;
+        db.pool.query(query1, function(error, rows, fields){    // Execute the query
 
-                // Construct an object for reference in the table
-                // Array.map is awesome for doing something with each
-                // element of an array.
-                let suppliermap = {}
-                suppliers.map(supplier => {
-                    let id = parseInt(supplier.supplier_id, 10);
-
-                    suppliermap[id] = supplier["supplier_name"];
-                })
-
-                // Overwrite the homeworld ID with the name of the planet in the people object
-                items = items.map(item => {
-                    return Object.assign(item, {supplier_id: suppliermap[item.supplier_id]})
-                })
-
-                return res.render('index', {data: items, suppliers: suppliers});
-            })
-        })
-});
-
-
+            res.render('index', {data: rows});                  // Render the index.hbs file, and also send the renderer
+        })                                                      // an object where 'data' is equal to the 'rows' we
+    });                                                         // received back from the query
 
 // POST
 app.post('/add-item-form', function(req, res){
@@ -136,15 +91,16 @@ app.post('/add-item-form', function(req, res){
     })
 })
     
-app.delete('/delete-item-ajax/', function(req,res,next){
+app.delete('/delete-item/:item_id', function(req,res,next){
     let data = req.body;
+    console.log(req.params.item_id)
     let item_id = parseInt(data.id);
     let deleteItemsSold = `DELETE FROM ItemsSold WHERE pid = ?`;
     let deleteItems= `DELETE FROM Items WHERE id = ?`;
   
   
           // Run the 1st query
-          db.pool.query(deleteItemsSold, [item_id], function(error, rows, fields){
+          db.pool.query(deleteItemsSold, [req.params.item_id], function(error, rows, fields){
               if (error) {
   
               // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
@@ -155,7 +111,7 @@ app.delete('/delete-item-ajax/', function(req,res,next){
               else
               {
                   // Run the second query
-                  db.pool.query(deleteItems, [item_id], function(error, rows, fields) {
+                  db.pool.query(deleteItems, [req.params.item_id], function(error, rows, fields) {
   
                       if (error) {
                           console.log(error);
