@@ -12,7 +12,7 @@ var app = express();
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 
-PORT = 9168;
+PORT = 9168; 
 
 // Database
 var db = require('./database/db-connector');
@@ -70,7 +70,7 @@ app.get('/', function(req, res)
                 // element of an array.
                 let suppliermap = {}
                 suppliers.map(supplier => {
-                    let id = parseInt(supplier.supplier_id, 10);
+                    let id = parseInt(supplier.supplier_id, 10); 
 
                     suppliermap[id] = supplier["supplier_name"];
                 })
@@ -124,7 +124,7 @@ app.post('/add-item-form', function(req, res){
 
             // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
             console.log(error)
-            res.sendStatus(400);
+            res.sendStatus(400); 
         }
 
         // If there was no error, we redirect back to our root route, which automatically runs the SELECT * FROM bsg_people and
