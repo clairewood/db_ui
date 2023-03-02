@@ -21,7 +21,6 @@ TO DO: <br>
 - Update app.js with the backend from the end of step 8
 
 BEFORE SUBMITTING: <br>
-- fix bug that adds comma to the end of text inputs -- HOW did this start <br>
 - run forever again on the right port <br>
 - populate materials and colors dynamically <br>
 - drop diagnostic table from DB <br>
