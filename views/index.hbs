@@ -13,9 +13,9 @@ If you see an Items table below, then we are connected to the DB. </p>
     <thead>
         {{!-- For just the first row, we print each key of the row object as a header cell so we
         know what each column means when the page renders --}}
-        {{#each css}}
+        <!-- {{#each css}}
             <link rel="stylesheet" href="/css{{this}}">
-        {{/each}}
+        {{/each}} -->
         <tr>
             {{#each data.[0]}}
             <th>
@@ -68,25 +68,32 @@ If you see an Items table below, then we are connected to the DB. </p>
     <select name="input-supplier_id" id="input-supplier-html">
         <option value="">Select a Supplier</option>
         {{#each suppliers}}
-        <option value="{{this.supplier_id}}">{{this.supplier_name}}</option>
+        <option value={{this.supplier_id}}>{{this.supplier_name}}</option>
         console.log(value)
         {{/each}}
     </select>
     
     <label for="input-material_id">Material ID: </label>
-    <input type="text" name="input-material_id" id="input-material_id">
-    <!--<select name="input-material" id="input-material-html">
+    <!-- <input type="text" name="input-material_id" id="input-material_id"> -->
+    <select name="input-material_id" id="input-material_id-html">
         <option value="">Select a Material</option>
-        {{#each materials}}
-        <option value="{{this.id}}">{{this.material_id}}</option>
-        {{/each}}
-    </select> -->
+        <option value="Glass">Glass</option>
+        <option value="Yarn">Yarn</option>
+    </select>
 
     <label for="input-color_id">Color ID: </label>
-    <input type="text" name="input-color_id" id="input-color_id">
+    <select name="input-color_id" id="input-color_id-html">
+        <option value="">Select a Color</option>
+        <option value="Blue">Blue</option>
+        <option value="Red">Red</option>
+    </select>
 
     <label for="input-in_stock">In stock? </label>
-    <input type="text" name="input-in_stock" id="input-in_stock">
+    <select name="input-in_stock" id="input-in_stock-html">
+        <option value="">In stock?</option>
+        <option value="1">Yes</option>
+        <option value="0">No</option>
+    </select>
 
     <label for="input-qty_on_hand">Current quantity: </label>
     <input type="text" name="input-qty_on_hand" id="input-qty_on_hand">

@@ -12,7 +12,7 @@ var app = express();
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 
-PORT = 9168; 
+PORT = 9169;
 
 // Database
 var db = require('./database/db-connector');
@@ -70,7 +70,7 @@ app.get('/', function(req, res)
                 // element of an array.
                 let suppliermap = {}
                 suppliers.map(supplier => {
-                    let id = parseInt(supplier.supplier_id, 10); 
+                    let id = parseInt(supplier.supplier_id, 10);
 
                     suppliermap[id] = supplier["supplier_name"];
                 })
@@ -82,10 +82,8 @@ app.get('/', function(req, res)
 
                 return res.render('index', {data: items, suppliers: suppliers});
             })
-        })
-});
-
-
+        }
+    )});
 
 // POST
 app.post('/add-item-form', function(req, res){
@@ -120,11 +118,11 @@ app.post('/add-item-form', function(req, res){
     db.pool.query(query1, function(error, rows, fields){ 
 
         // Check to see if there was an error
-        if (error) {
+        if (error) { 
 
             // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
-            console.log(error)
-            res.sendStatus(400); 
+            console.log(error) 
+            res.sendStatus(400);
         }
 
         // If there was no error, we redirect back to our root route, which automatically runs the SELECT * FROM bsg_people and
@@ -136,73 +134,6 @@ app.post('/add-item-form', function(req, res){
     })
 })
     
-app.delete('/delete-item-ajax/', function(req,res,next){
-    let data = req.body;
-    let item_id = parseInt(data.id);
-    let deleteItemsSold = `DELETE FROM ItemsSold WHERE pid = ?`;
-    let deleteItems= `DELETE FROM Items WHERE id = ?`;
-  
-  
-          // Run the 1st query
-          db.pool.query(deleteItemsSold, [item_id], function(error, rows, fields){
-              if (error) {
-  
-              // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
-              console.log(error);
-              res.sendStatus(400);
-              }
-  
-              else
-              {
-                  // Run the second query
-                  db.pool.query(deleteItems, [item_id], function(error, rows, fields) {
-  
-                      if (error) {
-                          console.log(error);
-                          res.sendStatus(400);
-                      } else {
-                          res.sendStatus(204);
-                      }
-                  })
-              }
-  })});
-
-  app.put('/put-item-ajax', function(req,res,next){
-    let data = req.body;
-  
-    let homeworld = parseInt(data.homeworld);
-    let person = parseInt(data.fullname);
-  
-    let queryUpdateWorld = `UPDATE bsg_people SET homeworld = ? WHERE bsg_people.id = ?`;
-    let selectWorld = `SELECT * FROM bsg_planets WHERE id = ?`
-  
-          // Run the 1st query
-          db.pool.query(queryUpdateWorld, [homeworld, person], function(error, rows, fields){
-              if (error) {
-  
-              // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
-              console.log(error);
-              res.sendStatus(400);
-              }
-  
-              // If there was no error, we run our second query and return that data so we can use it to update the people's
-              // table on the front-end
-              else
-              {
-                  // Run the second query
-                  db.pool.query(selectWorld, [homeworld], function(error, rows, fields) {
-  
-                      if (error) {
-                          console.log(error);
-                          res.sendStatus(400);
-                      } else {
-                          res.send(rows);
-                      }
-                  })
-              }
-  })});
-
-
 /*
     LISTENER
 */

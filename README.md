@@ -21,10 +21,12 @@ TO DO: <br>
 - Update app.js with the backend from the end of step 8
 
 BEFORE SUBMITTING: <br>
-- change port to 9168 because that's where forever is running <br>
+- fix bug that adds comma to the end of text inputs -- HOW did this start <br>
+- run forever again on the right port <br>
+- populate materials and colors dynamically <br>
 - drop diagnostic table from DB <br>
-- test that "forever" works <br>
-- turn some form inputs into dropdown menus <br>
+- fix css? <br>
+- turn form inputs into dropdown menus <br>
 - make sure every file has a source citation <br>
 - figure out why auto incremented ID in Items is doing weird stuff <br>
 - delete add_item.js from public folder if we end up sticking with form submittal method <br>
