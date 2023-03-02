@@ -12,7 +12,7 @@ var app = express();
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 
-PORT = 9157; 
+PORT = 9155; 
 
 // Database
 var db = require('./database/db-connector');
@@ -20,7 +20,7 @@ var db = require('./database/db-connector');
 // Handlebars
 const { engine } = require('express-handlebars');
 var exphbs = require('express-handlebars');     // Import express-handlebars
-const { query } = require('express');
+//const { query } = require('express');
 app.engine('.hbs', engine({extname: ".hbs"}));  // Create an instance of the handlebars engine to process templates
 app.set('view engine', '.hbs');                 // Tell express to use the handlebars engine whenever it encounters a *.hbs file.
 
@@ -85,16 +85,14 @@ app.get('/', function(req, res)
         })
 });
 
- 
-
-// POST
-app.post('/add-item-form', function(req, res){
+// POST -- ajax method instead
+app.post('/add-item-ajax', function(req, res) 
+{
     // Capture the incoming data and parse it back to a JS object
     let data = req.body;
 
     // Capture NULL values
     let qty_on_hand = parseInt(data['input-qty_on_hand']);
-    console.log(qty_on_hand)
     if (isNaN(qty_on_hand))
     {
         qty_on_hand = 'NULL'
@@ -124,17 +122,33 @@ app.post('/add-item-form', function(req, res){
 
             // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
             console.log(error)
-            res.sendStatus(400); 
+            res.sendStatus(400);
         }
-
-        // If there was no error, we redirect back to our root route, which automatically runs the SELECT * FROM bsg_people and
-        // presents it on the screen
         else
         {
-            res.redirect('/');
+            // If there was no error, perform a SELECT * on bsg_people
+            query2 = `SELECT Items.item_id, Items.supplier_id, Items.material_id, Items.color_id, Items.in_stock, Items.qty_on_hand, Items.price 
+FROM Items
+LEFT JOIN Items ON Items.supplier_id = Suppliers.supplier_id;`;
+            db.pool.query(query2, function(error, rows, fields){
+
+                // If there was an error on the second query, send a 400
+                if (error) {
+                    
+                    // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+                    console.log(error);
+                    res.sendStatus(400);
+                }
+                // If all went well, send the results of the query back.
+                else
+                {
+                    res.send(rows);
+                }
+            })
         }
     })
-})
+});
+
     
 app.delete('/delete-item-ajax/', function(req,res,next){
     let data = req.body;
@@ -167,41 +181,40 @@ app.delete('/delete-item-ajax/', function(req,res,next){
               }
   })});
 
-  app.put('/put-item-ajax', function(req,res,next){
+app.put('/put-person-ajax', function(req,res,next){
     let data = req.body;
-  
-    let homeworld = parseInt(data.homeworld);
-    let person = parseInt(data.fullname);
-  
-    let queryUpdateWorld = `UPDATE bsg_people SET homeworld = ? WHERE bsg_people.id = ?`;
-    let selectWorld = `SELECT * FROM bsg_planets WHERE id = ?`
-  
-          // Run the 1st query
-          db.pool.query(queryUpdateWorld, [homeworld, person], function(error, rows, fields){
-              if (error) {
-  
-              // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
-              console.log(error);
-              res.sendStatus(400);
-              }
-  
-              // If there was no error, we run our second query and return that data so we can use it to update the people's
-              // table on the front-end
-              else
-              {
-                  // Run the second query
-                  db.pool.query(selectWorld, [homeworld], function(error, rows, fields) {
-  
-                      if (error) {
-                          console.log(error);
-                          res.sendStatus(400);
-                      } else {
-                          res.send(rows);
-                      }
-                  })
-              }
-  })});
 
+    let supplier_id = parseInt(data.supplier_id);
+    let item_id = parseInt(data.item_id);
+
+    let queryUpdateSupplier = `UPDATE Items SET supplier_id = ? WHERE Items.item_id = ?`;
+    let selectSupplier = `SELECT * FROM Suppliers WHERE supplier_id = ?` // (!!!) check this shouldn't be supplier_name
+
+        // Run the 1st query
+        db.pool.query(queryUpdateSupplier, [supplier_id, item_id], function(error, rows, fields){
+            if (error) {
+
+            // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+            console.log(error);
+            res.sendStatus(400);
+            }
+
+            // If there was no error, we run our second query and return that data so we can use it to update the people's
+            // table on the front-end
+            else
+            {
+                // Run the second query
+                db.pool.query(selectSupplier, [supplier_id], function(error, rows, fields) {
+
+                    if (error) {
+                        console.log(error);
+                        res.sendStatus(400);
+                    } else {
+                        res.send(rows);
+                    }
+                })
+            }
+})});
 
 /*
     LISTENER

@@ -17,12 +17,18 @@ To load the database with a file: <br>
 TO DO (today): <br>
 - add UPDATE to app.js <br>
 - add DELETE to app.js <br>
+- make sure we can dynamically DELETE ppl <br>
 - make sure every file has a source citation <br>
 - add all other tables (do not have to have CRUD capabilities)<br>
 - remove itemsCRUD.sql file? <br>
 - Load DB with file again and check that it worked <br>
 - drop diagnostic table from DB <br>
 - run forever again on the right port and UPDATE PROJECT LINK <br>
+
+FOR NOTES: <br>
+- Other pages don't work besides Items <br>
+- Item auto_increment is being really weird for some reason <br>
+- 
 
 TO DO (next week): <br>
 - add all other tables (do not have to have CRUD capabilities)<br>

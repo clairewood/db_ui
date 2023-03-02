@@ -2,8 +2,6 @@
 <h1>Server is Running </h1>
 <p>If you see this text, the server is working. <br> 
 If you see an Items table below, then we are connected to the DB. </p> 
-
-
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
 
@@ -11,11 +9,6 @@ If you see an Items table below, then we are connected to the DB. </p>
 <table id="items-table">
     {{!-- Header section --}}
     <thead>
-        {{!-- For just the first row, we print each key of the row object as a header cell so we
-        know what each column means when the page renders --}}
-        <!-- {{#each css}}
-            <link rel="stylesheet" href="/css{{this}}">
-        {{/each}} -->
         <tr>
             {{#each data.[0]}}
             <th>
@@ -57,39 +50,37 @@ If you see an Items table below, then we are connected to the DB. </p>
     <a href='/'><button>Reset</button></a>
 </form>
 
-
-{{!-- Form to add a record to the table using standard HTML forms --}}
-<h2>Adding Data using an HTML form</h2>
-<p>To add a new Item, please enter its information below and click 'Submit'!</p>
-<form id="add-item-form" method="POST" action="/add-item-form">
-
+<!-- added this because add_item.js requires it to update ? I think -->
+{{!-- Form to add a record to the table  --}}
+<h2>Adding Data with AJAX</h2>
+<p>To add a new item, please enter their information below and click 'Submit'!</p>
+<form id="add-item-form-ajax">
     <label for="input-supplier_id">Supplier ID: </label>
 <!-- <input type="text" name="input-supplier_id" id="input-supplier_id"> -->
-    <select name="input-supplier_id" id="input-supplier-html">
+    <select name="input-supplier_id" id="input-supplier_id">
         <option value="">Select a Supplier</option>
         {{#each suppliers}}
         <option value={{this.supplier_id}}>{{this.supplier_name}}</option>
-        console.log(value)
         {{/each}}
     </select>
     
     <label for="input-material_id">Material ID: </label>
     <!-- <input type="text" name="input-material_id" id="input-material_id"> -->
-    <select name="input-material_id" id="input-material_id-html">
+    <select name="input-material_id" id="input-material_id">
         <option value="">Select a Material</option>
         <option value="Glass">Glass</option>
         <option value="Yarn">Yarn</option>
     </select>
 
     <label for="input-color_id">Color ID: </label>
-    <select name="input-color_id" id="input-color_id-html">
+    <select name="input-color_id" id="input-color_id">
         <option value="">Select a Color</option>
         <option value="Blue">Blue</option>
         <option value="Red">Red</option>
     </select>
 
     <label for="input-in_stock">In stock? </label>
-    <select name="input-in_stock" id="input-in_stock-html">
+    <select name="input-in_stock" id="input-in_stock">
         <option value="">In stock?</option>
         <option value="1">Yes</option>
         <option value="0">No</option>
@@ -103,40 +94,32 @@ If you see an Items table below, then we are connected to the DB. </p>
 
     <input type="submit">
 
+</form>
+{{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
+<script src="./js/add_item.js"></script>
 
-<h2>Updating an item form</h2>
-<p>To update a specific item select it</p>
+
+<h2>Updating an item's supplier form</h2>
+<p>To update a specific item's supplier, select item ID. </p>
 <form id="update-item-form-ajax">
+
     <label for="input-item_id">Item ID: </label>
     <select name="input-item_id" id="mySelect">
         <option value="test">Select an Item</option>
         {{#each data}}
-        <option value="{{this.item_id}}">{{this.item_id}}</option>
+        <option value={{this.item_id}}>{{this.item_id}}</option>
         {{/each}}
     </select>
+
     <label for="input-supplier_id">Supplier ID: </label>
-    <select name="input-supplier" id="input-supplier-html">
+    <select name="input-supplier_id" id="input-supplier_id-update">
         <option value="">Select a Supplier</option>
         {{#each suppliers}}
-        <option value="{{this.id}}">{{this.supplier_name}}</option>
+        <option value={{this.supplier_id}}>{{this.supplier_name}}</option>
         {{/each}}
     </select>
-
-    <label for="input-material_id">Material ID: </label>
-    <input type="text" name="input-material_id" id="input-material_id">
-
-    <label for="input-color_id">Color ID: </label>
-    <input type="text" name="input-color_id" id="input-color_id">
-
-    <label for="input-in_stock">In stock? </label>
-    <input type="text" name="input-in_stock" id="input-in_stock">
-
-    <label for="input-qty_on_hand">Current quantity: </label>
-    <input type="text" name="input-qty_on_hand" id="input-qty_on_hand">
-
-    <label for="input-price">Price: </label>
-    <input type="text" name="input-price" id="input-price">
 
     <input type="submit">
 </form>
-<script src="./js/update_person.js"></script>
+
+<script src="./js/update_item.js"></script>

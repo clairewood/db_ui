@@ -123,7 +123,7 @@ addRowToTable = (data) => {
     row.appenndChild(deleteCell);
 
     // Add a row attribute so the deleteRow function can find a newly added row
-    row.setAttribute('data-value', newRow.id);
+    row.setAttribute('data-value', newRow.item_id); // changed to item_id
 
     // Add the row to the table
     currentTable.appendChild(row);
@@ -134,7 +134,8 @@ addRowToTable = (data) => {
     // then append option to drop down menu so newly created rows via ajax will be found in it without needing a refresh
     let selectMenu = document.getElementById("mySelect");
     let option = document.createElement("option");
-    option.value = newRow.id;
+    option.text = newRow.item_id; // added option.text back in for html dropdown menu addition
+    option.value = newRow.item_id; // changed to item_id
     selectMenu.add(option);
     // End of new step 8 code.
 }
