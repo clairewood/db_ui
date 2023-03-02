@@ -14,18 +14,20 @@ To load the database with a file: <br>
  - add the source SQL file to database folder <br>
  - in MariaDB, run: source ./database/filename.sql;
 
-TO DO: <br>
+TO DO (today): <br>
 - add UPDATE to app.js <br>
-- add DELETE to app.js<br>
-- add all other tables (do not have to have CRUD capabilities)<br>
-- Update app.js with the backend from the end of step 8
-
-BEFORE SUBMITTING: <br>
-- run forever again on the right port <br>
-- populate materials and colors dynamically <br>
-- drop diagnostic table from DB <br>
-- fix css? <br>
-- turn form inputs into dropdown menus <br>
+- add DELETE to app.js <br>
 - make sure every file has a source citation <br>
-- figure out why auto incremented ID in Items is doing weird stuff <br>
-- delete add_item.js from public folder if we end up sticking with form submittal method <br>
+- add all other tables (do not have to have CRUD capabilities)<br>
+- remove itemsCRUD.sql file? <br>
+- Load DB with file again and check that it worked <br>
+- drop diagnostic table from DB <br>
+- run forever again on the right port and UPDATE PROJECT LINK <br>
+
+TO DO (next week): <br>
+- add all other tables (do not have to have CRUD capabilities)<br>
+- Update app.js with the backend from the end of step 8 <br>
+- populate materials and colors dynamically <br>
+- fix css <br>
+- turn form inputs into dropdown menus <br>
+
