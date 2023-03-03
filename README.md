@@ -17,7 +17,7 @@ To load the database with a file: <br>
 TO DO for next week: <br>
 - Do whatever Step 4 Final assignment says to do <br>
 - Fix Materials and Colors so they dynamically populate <br>
-- Fix qty_on_hand so it automatically changes to YES or NO for 1 or 0 <br>
+- Fix in_stock so it automatically changes to YES or NO for 1 or 0 <br>
 - Fix auto-incrementing for item_id <br>
 - Change table header names to real names (qty_on_hand to Quantity) <br>
 - Add auto-refresh code to UPDATE and DELETE <br>
