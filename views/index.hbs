@@ -1,7 +1,16 @@
 <!-- index.hbs -->
-<h1>Server is Running </h1>
-<p>If you see this text, the server is working. <br> 
-If you see an Items table below, then we are connected to the DB. </p> 
+<!-- This file was based on the file of the same name/location from the Node.js starter guide 
+accessed at this link: https://github.com/osu-cs340-ecampus/nodejs-starter-app --> 
+
+<h1> Morse Coders DBMS - Craft Store </h1>
+<h2> Items </h2>
+<a href="items.html">Items</a> | <a href="customers.html">Customers</a> |
+<a href="sales.html">Sales</a> | <a href="itemssold.html">Items Sold</a>
+<br>
+<a href="materials.html">Materials</a> | <a href="colors.html">Colors</a> |
+<a href="suppliers.html">Suppliers</a> | <a href="employees.html">Employees</a>
+<br> 
+<br>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
 
@@ -39,24 +48,11 @@ If you see an Items table below, then we are connected to the DB. </p>
 </table>
 <script src="./js/delete_item.js"></script>
 
-{{!-- Search --}}
-<h2>Search Using an HTML Form</h2>
-<p>Search by material ID</p>
-<form id="search-item-html" method='GET' action='/'>
-    <label for="input-material_id">Search by Material: </label>
-    <input type="text" name="material_id" id="input-material_id-html-search">
-    
-    <input type="submit">
-    <a href='/'><button>Reset</button></a>
-</form>
-
-<!-- added this because add_item.js requires it to update ? I think -->
 {{!-- Form to add a record to the table  --}}
-<h2>Adding Data with AJAX</h2>
+<h2>Add an item</h2>
 <p>To add a new item, please enter their information below and click 'Submit'!</p>
 <form id="add-item-form-ajax">
     <label for="input-supplier_id">Supplier ID: </label>
-<!-- <input type="text" name="input-supplier_id" id="input-supplier_id"> -->
     <select name="input-supplier_id" id="input-supplier_id">
         <option value="">Select a Supplier</option>
         {{#each suppliers}}
@@ -65,7 +61,6 @@ If you see an Items table below, then we are connected to the DB. </p>
     </select>
     
     <label for="input-material_id">Material ID: </label>
-    <!-- <input type="text" name="input-material_id" id="input-material_id"> -->
     <select name="input-material_id" id="input-material_id">
         <option value="">Select a Material</option>
         <option value="Glass">Glass</option>
@@ -95,11 +90,23 @@ If you see an Items table below, then we are connected to the DB. </p>
     <input type="submit">
 
 </form>
-{{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
 <script src="./js/add_item.js"></script>
 
 
-<h2>Updating an item's supplier form</h2>
+{{!-- Search --}}
+<h2>Search</h2>
+<p>Search by Material</p>
+<form id="search-item-html" method='GET' action='/'>
+    <label for="input-material_id">Search by Material: </label>
+    <input type="text" name="material_id" id="input-material_id-html-search">
+    
+    <input type="submit">
+    <a href='/'><button>Reset</button></a>
+</form>
+
+
+
+<h2>Update an item's supplier</h2>
 <p>To update a specific item's supplier, select item ID. </p>
 <form id="update-item-form-ajax">
 

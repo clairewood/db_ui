@@ -1,3 +1,6 @@
+// This file was based on the file of the same name/location from the Node.js starter guide 
+// accessed at this link: https://github.com/osu-cs340-ecampus/nodejs-starter-app 
+
 // Get the objects we need to modify
 let addItemForm = document.getElementById('add-item-form-ajax'); 
 // CHANGED from add-item-form-ajax 
@@ -43,8 +46,6 @@ addItemForm.addEventListener("submit", function (e) {
 
     // Tell our AJAX request how to resolve
     xhttp.onreadystatechange = () => {
-        // When readyState becomes 4 it means it's done receiving
-        // so we start looking for the "OK" code (200)
         if (xhttp.readyState == 4 && xhttp.status == 200) {
 
             // When we get OK code, we add the row the table in the DOM...
@@ -93,8 +94,7 @@ addRowToTable = (data) => {
     let quantityCell = document.createElement("TD");
     let priceCell = document.createElement("TD");
 
-    let deleteCell = document.createElement("TD");
-
+    //let deleteCell = document.createElement("TD"); //
 
     // Fill the cells with correct data
     idCell.innerText = newRow.item_id;
@@ -120,7 +120,7 @@ addRowToTable = (data) => {
     row.appendChild(instockCell);
     row.appendChild(quantityCell);
     row.appendChild(priceCell);
-    row.appenndChild(deleteCell);
+    row.appendChild(deleteCell);
 
     // Add a row attribute so the deleteRow function can find a newly added row
     row.setAttribute('data-value', newRow.item_id); // changed to item_id

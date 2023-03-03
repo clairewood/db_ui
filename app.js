@@ -1,6 +1,6 @@
 // App.js
-// This code was based on the Node.js starter guide accessed at this link:
-// https://github.com/osu-cs340-ecampus/nodejs-starter-app 
+// This file was based on the file of the same name/location from the Node.js starter guide 
+// accessed at this link: https://github.com/osu-cs340-ecampus/nodejs-starter-app 
 
 /*
     SETUP
@@ -9,10 +9,10 @@
 // Express
 var express = require('express');
 var app = express();
-app.use(express.json())
-app.use(express.urlencoded({extended: true}))
+//app.use(express.json())
+//app.use(express.urlencoded({extended: true}))
 
-PORT = 9155; 
+PORT = 9157; 
 
 // Database
 var db = require('./database/db-connector');
@@ -20,14 +20,16 @@ var db = require('./database/db-connector');
 // Handlebars
 const { engine } = require('express-handlebars');
 var exphbs = require('express-handlebars');     // Import express-handlebars
-//const { query } = require('express');
+const { query } = require('express');
 app.engine('.hbs', engine({extname: ".hbs"}));  // Create an instance of the handlebars engine to process templates
 app.set('view engine', '.hbs');                 // Tell express to use the handlebars engine whenever it encounters a *.hbs file.
 
-// Static files
+// SETUP Section
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 app.use(express.static('public')) 
+// app.use(express.static(__dirname + 'public')) 
+
 
 
 /*
@@ -92,29 +94,29 @@ app.post('/add-item-ajax', function(req, res)
     let data = req.body;
 
     // Capture NULL values
-    let qty_on_hand = parseInt(data['input-qty_on_hand']);
+    let qty_on_hand = parseInt(data.qty_on_hand);
     if (isNaN(qty_on_hand))
     {
         qty_on_hand = 'NULL'
     }
-    let price = parseInt(data['input-price']);
+    let price = parseInt(data.price);
     if (isNaN(price))
     {
         price = 'NULL'
     }
-    let supplier_id = parseInt(data['input-supplier_id']);
+    let supplier_id = parseInt(data.supplier_id);
     if (isNaN(supplier_id))
     {
         supplier_id = 'NULL'
     }
-    let in_stock = parseInt(data['input-in_stock']);
+    let in_stock = parseInt(data.in_stock);
     if (isNaN(in_stock))
     {
         in_stock = 'NULL'
     }
 
     // Create the query and run it on the database
-    query1 = `INSERT INTO Items (supplier_id, material_id, color_id, in_stock, qty_on_hand, price) VALUES (${supplier_id}, '${data['input-material_id']}', '${data['input-color_id']}', ${in_stock}, ${qty_on_hand}, ${price})`;
+    query1 = `INSERT INTO Items (supplier_id, material_id, color_id, in_stock, qty_on_hand, price) VALUES (${supplier_id}, '${data.material_id}', '${data.color_id}', ${in_stock}, ${qty_on_hand}, ${price})`;
     db.pool.query(query1, function(error, rows, fields){ 
 
         // Check to see if there was an error
@@ -129,7 +131,7 @@ app.post('/add-item-ajax', function(req, res)
             // If there was no error, perform a SELECT * on bsg_people
             query2 = `SELECT Items.item_id, Items.supplier_id, Items.material_id, Items.color_id, Items.in_stock, Items.qty_on_hand, Items.price 
 FROM Items
-LEFT JOIN Items ON Items.supplier_id = Suppliers.supplier_id;`;
+LEFT JOIN Suppliers ON Items.supplier_id = Suppliers.supplier_id;`;
             db.pool.query(query2, function(error, rows, fields){
 
                 // If there was an error on the second query, send a 400
@@ -153,8 +155,8 @@ LEFT JOIN Items ON Items.supplier_id = Suppliers.supplier_id;`;
 app.delete('/delete-item-ajax/', function(req,res,next){
     let data = req.body;
     let item_id = parseInt(data.id);
-    let deleteItemsSold = `DELETE FROM ItemsSold WHERE pid = ?`;
-    let deleteItems= `DELETE FROM Items WHERE id = ?`;
+    let deleteItemsSold = `DELETE FROM ItemsSold WHERE item_id = ?`;
+    let deleteItems= `DELETE FROM Items WHERE item_id = ?`;
   
   
           // Run the 1st query
@@ -181,7 +183,7 @@ app.delete('/delete-item-ajax/', function(req,res,next){
               }
   })});
 
-app.put('/put-person-ajax', function(req,res,next){
+app.put('/put-item-ajax', function(req,res,next){
     let data = req.body;
 
     let supplier_id = parseInt(data.supplier_id);

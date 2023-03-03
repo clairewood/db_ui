@@ -1,3 +1,6 @@
+// This file was based on the file of the same name/location from the Node.js starter guide 
+// accessed at this link: https://github.com/osu-cs340-ecampus/nodejs-starter-app 
+
 /*Step 7A */
 function deleteItem(item_id){
     let link = '/delete-item-ajax/';

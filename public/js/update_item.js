@@ -1,3 +1,7 @@
+// This file was based on the file of the same name/location from the Node.js starter guide 
+// accessed at this link: https://github.com/osu-cs340-ecampus/nodejs-starter-app 
+
+
 // Get the objects we need to modify
 let updateItemForm = document.getElementById('update-item-form-ajax');
 
