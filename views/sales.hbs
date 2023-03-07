@@ -1,0 +1,102 @@
+<!-- index.hbs -->
+<!-- This file was based on the file of the same name/location from the Node.js starter guide 
+accessed at this link: https://github.com/osu-cs340-ecampus/nodejs-starter-app --> 
+
+<h1> Morse Coders DBMS - Craft Store </h1>
+<h2> Sales </h2>
+<a href="/">Items</a> | <a href="/customers">Customers</a> |
+<a href="/sales">Sales</a> | <a href="/itemssold">Items Sold</a>
+<br>
+<a href="/materials">Materials</a> | <a href="/colors">Colors</a> |
+<a href="/suppliers">Suppliers</a> | <a href="/employees">Employees</a>
+<br> 
+<br>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+
+{{!-- Create a table --}}
+<table id="sales-table">
+    {{!-- Header section --}}
+    <thead>
+        <tr>
+            {{#each data.[0]}}
+            <th>
+                {{@key}}
+            </th>
+            {{/each}}
+            <th>delete</th>
+        </tr>
+    </thead>
+
+    {{!-- Body section --}}
+    <tbody>
+
+        {{!-- For each row, print the id, fname, lname, homeworld and age, in order --}}
+        {{#each data}}
+        <tr data-value={{this.sale_id}}>
+            <td>{{this.sale_id}}</td>
+            <td>{{this.sale_date}}</td>
+            <td>{{this.customer_id}}</td>
+            <td>{{this.employee_id}}</td>
+            <td><button onclick="deleteSale({{this.sale_id}})">Delete</button></td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+<td><button onclick="window.location.reload();">Refresh</button>
+
+<script src="./js/delete_sale.js"></script>
+
+{{!-- Form to add a record to the table  --}}
+<h2>Add a sale</h2>
+<p>To add a new sale, please fill in the information below and click 'Submit'!</p>
+<form id="add-sale-form-ajax">
+
+    <label for="input-sale_date">Date: </label>
+    <input type="date" name="input-sale_date" id="input-sale_date">
+
+    <label for="input-customer_id">Customer: </label>
+    <select name="input-customer_id" id="input-customer_id">
+        <option value="">Select a Customer</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+    </select>
+
+     <label for="input-employee_id">Employee: </label>
+    <select name="input-employee_id" id="input-employee_id">
+        <option value="">Select an Employee</option>
+        {{#each employees}}
+        <option value={{this.employee_id}}>{{this.employee_fname}} {{this.employee_lname}}</option> 
+        {{/each}}
+    </select>
+
+    <input type="submit">
+
+</form>
+<script src="./js/add_sale.js"></script>
+
+
+<h2>Update Sale Employee</h2>
+<p>To update the employee who made the sale, select the employee ID. </p>
+<form id="update-sale-form-ajax">
+
+    <label for="input-sale_id">Sale ID: </label>
+    <select name="input-sale_id" id="mySelect">
+        <option value="test">Select a Sale</option>
+        {{#each data}}
+        <option value={{this.sale_id}}>{{this.sale_id}}</option>
+        {{/each}}
+    </select>
+
+    <label for="input-employee_id">Employee ID: </label>
+    <select name="input-employee_id" id="input-employee_id-update">
+        <option value="">Select an Employee</option>
+        {{#each employees}}
+        <option value={{this.employee_id}}>{{this.employee_fname}} {{this.employee_lname}}</option> 
+        {{/each}}
+    </select>
+
+    <input type="submit">
+</form>
+
+<script src="./js/update_sale.js"></script>

@@ -4,11 +4,11 @@ accessed at this link: https://github.com/osu-cs340-ecampus/nodejs-starter-app -
 
 <h1> Morse Coders DBMS - Craft Store </h1>
 <h2> Items </h2>
-<a href="items.html">Items</a> | <a href="customers.html">Customers</a> |
-<a href="sales.html">Sales</a> | <a href="itemssold.html">Items Sold</a>
+<a href="/">Items</a> | <a href="/customers">Customers</a> |
+<a href="/sales">Sales</a> | <a href="/itemssold">Items Sold</a>
 <br>
-<a href="materials.html">Materials</a> | <a href="colors.html">Colors</a> |
-<a href="suppliers.html">Suppliers</a> | <a href="employees.html">Employees</a>
+<a href="/materials">Materials</a> | <a href="/colors">Colors</a> |
+<a href="/suppliers">Suppliers</a> | <a href="/employees">Employees</a>
 <br> 
 <br>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
@@ -46,6 +46,8 @@ accessed at this link: https://github.com/osu-cs340-ecampus/nodejs-starter-app -
         {{/each}}
     </tbody>
 </table>
+<td><button onclick="window.location.reload();">Refresh</button>
+
 <script src="./js/delete_item.js"></script>
 
 {{!-- Form to add a record to the table  --}}

@@ -14,9 +14,20 @@ To load the database with a file: <br>
  - in MariaDB, run: source ./database/filename.sql;
 
 TO DO for next week: <br>
-- Do whatever Step 4 Final assignment says to do <br>
-- Fix Materials and Colors so they dynamically populate <br>
+- Add CRUD for Sales (DONE: Create and Read. IP: Update and Delete) <br> 
+- Fix Materials and Colors so they dynamically populate in Items <br>
 - Fix in_stock so it automatically changes to YES or NO for 1 or 0 <br>
-- Fix auto-incrementing for item_id <br>
+- Fix date appearance and NULL appearance in Sales <br>
+- Fix employee_id to show up as fname AND lname in Sales <br>
+- Fix customer_id to dynamically populate <br>
+- Fix dynamic population issues: <br>
+---- ITEMS -> materials, colors, in_stock (populate YES or NO instead of 1 or 0) <br>
+---- SALES -> employee_id (add lname), customer_id <br>
+
+Lower priority: <br>
+- Add auto-refresh to DELETE <br>
+- Fix auto-incrementing for item_id ? <br>
 - Change table header names to real names (qty_on_hand to Quantity) <br>
-- Add auto-refresh code to UPDATE and DELETE <br>
+
+
+

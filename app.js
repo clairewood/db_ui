@@ -12,7 +12,7 @@ var app = express();
 //app.use(express.json())
 //app.use(express.urlencoded({extended: true}))
 
-PORT = 9157; 
+PORT = 9153; 
 
 // Database
 var db = require('./database/db-connector');
@@ -36,7 +36,7 @@ app.use(express.static('public'))
     ROUTES
 */
 
-// GET
+// GET ITEMS
 app.get('/', function(req, res)
     {  
         // Declare Query 1
@@ -87,7 +87,41 @@ app.get('/', function(req, res)
         })
 });
 
-// POST -- ajax method instead
+// GET SALES
+
+app.get('/sales', function(req, res)
+    {
+        let query1 = "SELECT * From Sales;";
+
+        let query2 = "SELECT * FROM Employees;";
+
+        db.pool.query(query1, function(error, rows, fields){ 
+
+            let sales = rows;
+
+            db.pool.query(query2, (error, rows,fields) => {
+
+                let employees = rows;
+
+                let employeemap = {}
+                employees.map(employee => {
+                    let id = parseInt(employee.employee_id, 10);
+
+                    employeemap[id] = employee["employee_lname"]; //, employee["employee_lname"];
+                    //employeemap[id] = employee["employee_lname"]
+                })
+
+                sales = sales.map(sale => {
+                    return Object.assign(sale, {employee_id: employeemap[sale.employee_id]})
+                })
+
+                return res.render('sales', {data: sales, employees: employees})
+            })
+        })
+    });
+
+// ITEM CRUD
+
 app.post('/add-item-ajax', function(req, res) 
 {
     // Capture the incoming data and parse it back to a JS object
@@ -217,6 +251,129 @@ app.put('/put-item-ajax', function(req,res,next){
                 })
             }
 })});
+
+// SALES CRUD
+
+app.post('/add-sale-ajax', function(req, res) 
+{
+    // Capture the incoming data and parse it back to a JS object
+    let data = req.body;
+
+    // Capture NULL values
+    let customer_id = parseInt(data.customer_id);
+    if (isNaN(customer_id))
+    {
+        customer_id = 'NULL'
+    }
+    let employee_id = parseInt(data.employee_id);
+    if (isNaN(employee_id))
+    {
+        employee_id = 'NULL'
+    }
+
+    // Create the query and run it on the database
+    query1 = `INSERT INTO Sales (sale_date, customer_id, employee_id) VALUES ('${data.sale_date}', ${customer_id}, ${employee_id})`;
+    db.pool.query(query1, function(error, rows, fields){ 
+
+        // Check to see if there was an error
+        if (error) {
+
+            // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+            console.log(error)
+            res.sendStatus(400);
+        }
+        else
+        {
+            // If there was no error, perform a SELECT * on bsg_people
+            query2 = `SELECT Sales.sale_id, Sales.sale_date, Sales.customer_id, Sales.employee_id 
+FROM Sales
+LEFT JOIN Employees ON Sales.employee_id = Employees.employee_id;`;
+            db.pool.query(query2, function(error, rows, fields){
+
+                // If there was an error on the second query, send a 400
+                if (error) {
+                    
+                    // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+                    console.log(error);
+                    res.sendStatus(400);
+                }
+                // If all went well, send the results of the query back.
+                else
+                {
+                    res.send(rows);
+                }
+            })
+        }
+    })
+});
+
+    
+app.delete('/delete-sale-ajax/', function(req,res,next){
+    let data = req.body;
+    let sale_id = parseInt(data.id);
+    let deleteItemsSold = `DELETE FROM ItemsSold WHERE sale_id = ?`;
+    let deleteSales= `DELETE FROM Sales WHERE sale_id = ?`;
+  
+  
+          // Run the 1st query
+          db.pool.query(deleteItemsSold, [sale_id], function(error, rows, fields){
+              if (error) {
+  
+              // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+              console.log(error);
+              res.sendStatus(400);
+              }
+  
+              else
+              {
+                  // Run the second query
+                  db.pool.query(deleteSales, [sale_id], function(error, rows, fields) {
+  
+                      if (error) {
+                          console.log(error);
+                          res.sendStatus(400);
+                      } else {
+                          res.sendStatus(204);
+                      }
+                  })
+              }
+  })});
+
+app.put('/put-sale-ajax', function(req,res,next){
+    let data = req.body;
+
+    let employee_id = parseInt(data.employee_id);
+    let sale_id = parseInt(data.sale_id);
+
+    let queryUpdateEmployee = `UPDATE Sales SET employee_id = ? WHERE Sales.sale_id = ?`;
+    let selectEmployee = `SELECT * FROM Employees WHERE employee_id = ?` // (!!!) check this shouldn't be supplier_name
+
+        // Run the 1st query
+        db.pool.query(queryUpdateEmployee, [employee_id, sale_id], function(error, rows, fields){
+            if (error) {
+
+            // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+            console.log(error);
+            res.sendStatus(400);
+            }
+
+            // If there was no error, we run our second query and return that data so we can use it to update the people's
+            // table on the front-end
+            else
+            {
+                // Run the second query
+                db.pool.query(selectEmployee, [employee_id], function(error, rows, fields) {
+
+                    if (error) {
+                        console.log(error);
+                        res.sendStatus(400);
+                    } else {
+                        res.send(rows);
+                    }
+                }) 
+            }
+})});
+
 
 /*
     LISTENER
