@@ -2,11 +2,11 @@
 // accessed at this link: https://github.com/osu-cs340-ecampus/nodejs-starter-app 
 
 // Get the objects we need to modify
-let addSaleForm = document.getElementById('add-supplier-form-ajax'); 
+let addSupplierForm = document.getElementById('add-supplier-form-ajax'); 
 
 // Modify the objects we need
 // (Gather input data from the form, package it into a single object called 'data')
-addSaleForm.addEventListener("submit", function (e) {
+addSupplierForm.addEventListener("submit", function (e) {
     
     // Prevent the form from submitting
     e.preventDefault(); // CHANGED: Removed so page would refresh
