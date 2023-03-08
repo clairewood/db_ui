@@ -1,0 +1,53 @@
+<!-- index.hbs -->
+<!-- This file was based on the file of the same name/location from the Node.js starter guide 
+accessed at this link: https://github.com/osu-cs340-ecampus/nodejs-starter-app --> 
+
+<h1> Morse Coders DBMS - Craft Store </h1>
+<h2> Materials </h2>
+<a href="/">Items</a> | <a href="/customers">Customers</a> |
+<a href="/sales">Sales</a> | <a href="/itemssold">Items Sold</a>
+<br>
+<a href="/materials">Materials</a> | <a href="/colors">Colors</a> |
+<a href="/suppliers">Suppliers</a> | <a href="/employees">Employees</a>
+<br> 
+<br>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+
+{{!-- Create a table --}}
+<table id="materials-table">
+    {{!-- Header section --}}
+    <thead>
+        <tr>
+            {{#each data.[0]}}
+            <th>
+                {{@key}}
+            </th>
+            {{/each}}
+        </tr>
+    </thead>
+
+    {{!-- Body section --}}
+    <tbody>
+
+        {{!-- For each row, print the id, fname, lname, homeworld and age, in order --}}
+        {{#each data}}
+        <tr data-value={{this.material_id}}>
+            <td>{{this.material_id}}</td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+{{!-- Form to add a record to the table  --}}
+<h2>Add a Material</h2>
+<p>To add a new material, please enter it below and click 'Submit'!</p>
+<form id="add-material-form-ajax">
+    <label for="input-material_id">Material: </label>
+    <input type="text" name="input-material_id" id="input-material_id">
+
+    <input type="submit">
+
+</form>
+<script src="./js/add_material.js"></script>
+

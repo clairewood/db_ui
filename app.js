@@ -132,6 +132,31 @@ app.get('/suppliers', function(req, res)
     })                                                      // an object where 'data' is equal to the 'rows' we
 });   
 
+// GET MATERIALS
+
+app.get('/materials', function(req, res)
+{  
+    let query1 = "SELECT * FROM Materials;";               // Define our query
+
+    db.pool.query(query1, function(error, rows, fields){    // Execute the query
+
+        res.render('materials', {data: rows});                  // Render the index.hbs file, and also send the renderer
+    })                                                      // an object where 'data' is equal to the 'rows' we
+});   
+
+
+// GET COLORS
+
+app.get('/colors', function(req, res)
+{  
+    let query1 = "SELECT * FROM Colors;";               // Define our query
+
+    db.pool.query(query1, function(error, rows, fields){    // Execute the query
+
+        res.render('colors', {data: rows});                  // Render the index.hbs file, and also send the renderer
+    })                                                      // an object where 'data' is equal to the 'rows' we
+});   
+
 
 // ITEM CRUD
 
@@ -435,6 +460,88 @@ app.post('/add-supplier-ajax', function(req, res)
 });
 
 
+// MATERIALS
+
+app.post('/add-material-ajax', function(req, res) 
+{
+    // Capture the incoming data and parse it back to a JS object
+    let data = req.body;
+
+    // Create the query and run it on the database
+    query1 = `INSERT INTO Materials (material_id) VALUES ('${data.material_id}')`;
+    db.pool.query(query1, function(error, rows, fields){ 
+
+        // Check to see if there was an error
+        if (error) {
+
+            // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+            console.log(error)
+            res.sendStatus(400);
+        }
+        else
+        {
+            // If there was no error, perform a SELECT * on bsg_people
+            query2 = `SELECT * from Materials;`;
+            db.pool.query(query2, function(error, rows, fields){
+
+                // If there was an error on the second query, send a 400
+                if (error) {
+                    
+                    // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+                    console.log(error);
+                    res.sendStatus(400);
+                }
+                // If all went well, send the results of the query back.
+                else
+                {
+                    res.send(rows);
+                }
+            })
+        }
+    })
+});
+
+
+// MATERIALS
+
+app.post('/add-color-ajax', function(req, res) 
+{
+    // Capture the incoming data and parse it back to a JS object
+    let data = req.body;
+
+    // Create the query and run it on the database
+    query1 = `INSERT INTO Colors (color_id) VALUES ('${data.color_id}')`;
+    db.pool.query(query1, function(error, rows, fields){ 
+
+        // Check to see if there was an error
+        if (error) {
+
+            // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+            console.log(error)
+            res.sendStatus(400);
+        }
+        else
+        {
+            // If there was no error, perform a SELECT * on bsg_people
+            query2 = `SELECT * from Colors;`;
+            db.pool.query(query2, function(error, rows, fields){
+
+                // If there was an error on the second query, send a 400
+                if (error) {
+                    
+                    // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+                    console.log(error);
+                    res.sendStatus(400);
+                }
+                // If all went well, send the results of the query back.
+                else
+                {
+                    res.send(rows);
+                }
+            })
+        }
+    })
+});
 
 /*
     LISTENER

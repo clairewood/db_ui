@@ -14,7 +14,6 @@ To load the database with a file: <br>
  - in MariaDB, run: source ./database/filename.sql;
 
 TO DO: <br>
-- Add Materials, Colors, Suppliers <br>
 - Try to fix update-to-null for employee_id in Sales <br> 
 - Fix Materials and Colors so they dynamically populate in Items <br>
 - Fix in_stock so it automatically changes to YES or NO for 1 or 0 <br>
@@ -27,10 +26,11 @@ TO DO: <br>
 
 Lower priority: <br>
 - Add auto-refresh to DELETE <br>
-- Fix auto-incrementing for item_id ? <br>
 - Change table header names to real names (qty_on_hand to Quantity) <br>
 
 NOTES FOR SUBMITTAL: <br>
-- What works: CRUD for Items and Sales (mostly -- see below) <br>
+- What works: Create and Read for Colors, Materials, and Suppliers, <br> 
+and CRUD for Items and Sales <br>
 - What doesn't: Can't get Sales to update employee_id to NULL <br>
+
 
