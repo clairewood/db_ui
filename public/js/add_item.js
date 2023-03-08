@@ -94,7 +94,7 @@ addRowToTable = (data) => {
     let quantityCell = document.createElement("TD");
     let priceCell = document.createElement("TD");
 
-    //let deleteCell = document.createElement("TD"); //
+    let deleteCell = document.createElement("TD"); //
 
     // Fill the cells with correct data
     idCell.innerText = newRow.item_id;

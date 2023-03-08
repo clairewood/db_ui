@@ -102,6 +102,7 @@ addRowToTable = (data) => {
     row.appendChild(dateCell);
     row.appendChild(customerCell);
     row.appendChild(employeeCell);
+    row.appendChild(deleteCell);
 
 
     // Add a row attribute so the deleteRow function can find a newly added row

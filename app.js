@@ -12,7 +12,7 @@ var app = express();
 //app.use(express.json())
 //app.use(express.urlencoded({extended: true}))
 
-PORT = 9153; 
+PORT = 9387; 
 
 // Database
 var db = require('./database/db-connector');
@@ -338,6 +338,7 @@ app.delete('/delete-sale-ajax/', function(req,res,next){
                   })
               }
   })});
+
 
 app.put('/put-sale-ajax', function(req,res,next){
     let data = req.body;

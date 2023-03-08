@@ -14,7 +14,7 @@ To load the database with a file: <br>
  - in MariaDB, run: source ./database/filename.sql;
 
 TO DO for next week: <br>
-- Add CRUD for Sales (DONE: Create and Read. IP: Update and Delete) <br> 
+- Add CRUD for Sales (DONE: Create, Read, Delete. IP: Update ) <br> 
 - Fix Materials and Colors so they dynamically populate in Items <br>
 - Fix in_stock so it automatically changes to YES or NO for 1 or 0 <br>
 - Fix date appearance and NULL appearance in Sales <br>
