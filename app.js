@@ -12,7 +12,7 @@ var app = express();
 //app.use(express.json())
 //app.use(express.urlencoded({extended: true}))
 
-PORT = 9387; 
+PORT = 9381; 
 
 // Database
 var db = require('./database/db-connector');
@@ -23,6 +23,7 @@ var exphbs = require('express-handlebars');     // Import express-handlebars
 const { query } = require('express');
 app.engine('.hbs', engine({extname: ".hbs"}));  // Create an instance of the handlebars engine to process templates
 app.set('view engine', '.hbs');                 // Tell express to use the handlebars engine whenever it encounters a *.hbs file.
+var helpers = require('handlebars-helpers')(); // We'll use this to format the way date is displayed in Sales
 
 // SETUP Section
 app.use(express.json())
@@ -54,6 +55,11 @@ app.get('/', function(req, res)
     
         // Query 2 is the same in both cases
         let query2 = "SELECT * FROM Suppliers;";
+
+        let query3 = "SELECT * FROM Materials;";
+
+        let query4 = "SELECT * FROM Colors;";
+
     
         // Run the 1st query
         db.pool.query(query1, function(error, rows, fields){
@@ -81,8 +87,22 @@ app.get('/', function(req, res)
                 items = items.map(item => {
                     return Object.assign(item, {supplier_id: suppliermap[item.supplier_id]})
                 })
+                
+                db.pool.query(query3, (error, rows, fields) => {
 
-                return res.render('index', {data: items, suppliers: suppliers});
+                    let materials = rows;
+
+                    db.pool.query(query4, (error, rows, fields) => {
+
+                        let colors = rows; 
+
+                        return res.render('index', {data: items, suppliers: suppliers, materials: materials, colors: colors});
+                        
+                    })
+
+                })
+
+                // return res.render('index', {data: items, suppliers: suppliers});
             })
         })
 });
@@ -91,31 +111,49 @@ app.get('/', function(req, res)
 
 app.get('/sales', function(req, res)
     {
-        let query1 = "SELECT * From Sales;";
+        let query1 = "SELECT * FROM Sales;";
 
         let query2 = "SELECT * FROM Employees;";
+
+        let query3 = "SELECT * FROM Customers;";
 
         db.pool.query(query1, function(error, rows, fields){ 
 
             let sales = rows;
 
-            db.pool.query(query2, (error, rows,fields) => {
+            db.pool.query(query3, (error, rows, fields) => {
 
-                let employees = rows;
+                let customers = rows;
 
-                let employeemap = {}
-                employees.map(employee => {
-                    let id = parseInt(employee.employee_id, 10);
+                let customermap = {}
+                    customers.map(customer => {
+                        let id = parseInt(customer.customer_id, 10);
+    
+                        customermap[id] = customer["customer_fname"]; 
+                    })
+    
+                    sales = sales.map(sale => {
+                        return Object.assign(sale, {customer_id: customermap[sale.customer_id]})
+                    })
 
-                    employeemap[id] = employee["employee_lname"]; //, employee["employee_lname"];
-                    //employeemap[id] = employee["employee_lname"]
+                db.pool.query(query2, (error, rows, fields) => {
+
+                    let employees = rows;
+    
+                    let employeemap = {}
+                    employees.map(employee => {
+                        let id = parseInt(employee.employee_id, 10);
+    
+                        employeemap[id] = employee["employee_fname"]; 
+                    })
+    
+                    sales = sales.map(sale => {
+                        return Object.assign(sale, {employee_id: employeemap[sale.employee_id]})
+                    })
+                    
+                    return res.render('sales', {data: sales, customers: customers, employees: employees})
+
                 })
-
-                sales = sales.map(sale => {
-                    return Object.assign(sale, {employee_id: employeemap[sale.employee_id]})
-                })
-
-                return res.render('sales', {data: sales, employees: employees})
             })
         })
     });
@@ -301,12 +339,12 @@ app.post('/add-sale-ajax', function(req, res)
     let customer_id = parseInt(data.customer_id);
     if (isNaN(customer_id))
     {
-        customer_id = NULL
+        customer_id = 'NULL'
     }
     let employee_id = parseInt(data.employee_id);
     if (isNaN(employee_id))
     {
-        employee_id = NULL
+        employee_id = 'NULL'
     }
 
     // Create the query and run it on the database
@@ -384,7 +422,7 @@ app.put('/put-sale-ajax', function(req,res,next){
     let employee_id = parseInt(data.employee_id);
     if (isNaN(employee_id))
     {
-        employee_id = NULL
+        employee_id = null 
     }
     let sale_id = parseInt(data.sale_id);
 

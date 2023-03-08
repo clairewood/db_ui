@@ -38,7 +38,12 @@ accessed at this link: https://github.com/osu-cs340-ecampus/nodejs-starter-app -
             <td>{{this.supplier_id}}</td>
             <td>{{this.material_id}}</td>
             <td>{{this.color_id}}</td>
-            <td>{{this.in_stock}}</td>
+            {{#if this.in_stock}} <!-- show as Yes/No instead of 1/0-->
+            <td> Yes</td>
+            {{else}}
+            <td> No </td>
+            {{/if}}
+            <!--<td>{{this.in_stock}}</td>-->
             <td>{{this.qty_on_hand}}</td>
             <td>{{this.price}}</td>
             <td><button onclick="deleteItem({{this.item_id}})">Delete</button></td>
@@ -65,15 +70,23 @@ accessed at this link: https://github.com/osu-cs340-ecampus/nodejs-starter-app -
     <label for="input-material_id">Material ID: </label>
     <select name="input-material_id" id="input-material_id">
         <option value="">Select a Material</option>
+        {{#each materials}}
+        <option value={{this.material_id}}>{{this.material_id}}</option>
+        {{/each}}
+        <!-- <option value="">Select a Material</option>
         <option value="Glass">Glass</option>
-        <option value="Yarn">Yarn</option>
+        <option value="Yarn">Yarn</option> --> 
     </select>
 
     <label for="input-color_id">Color ID: </label>
     <select name="input-color_id" id="input-color_id">
         <option value="">Select a Color</option>
+        {{#each colors}}
+        <option value={{this.color_id}}>{{this.color_id}}</option>
+        {{/each}}
+        <!-- <option value="">Select a Color</option>
         <option value="Blue">Blue</option>
-        <option value="Red">Red</option>
+        <option value="Red">Red</option>-->
     </select>
 
     <label for="input-in_stock">In stock? </label>

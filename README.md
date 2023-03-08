@@ -14,12 +14,9 @@ To load the database with a file: <br>
  - in MariaDB, run: source ./database/filename.sql;
 
 TO DO: <br>
-- Try to fix update-to-null for employee_id in Sales <br> 
-- Fix Materials and Colors so they dynamically populate in Items <br>
-- Fix in_stock so it automatically changes to YES or NO for 1 or 0 <br>
-- Fix date appearance and NULL appearance in Sales <br>
-- Fix employee_id to show up as fname AND lname in Sales <br>
-- Fix customer_id to dynamically populate <br>
+- Add Employees table? <br>
+- Add ItemsSold table? <br>
+- Fix employee_id and customer_id to show up as fname AND lname in Sales <br>
 - Fix dynamic population issues: <br>
 ---- ITEMS -> materials, colors, in_stock (populate YES or NO instead of 1 or 0) <br>
 ---- SALES -> employee_id (add lname), customer_id <br>
