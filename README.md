@@ -28,6 +28,5 @@ Lower priority: <br>
 NOTES FOR SUBMITTAL: <br>
 - What works: Create and Read for Colors, Materials, and Suppliers, <br> 
 and CRUD for Items and Sales <br>
-- What doesn't: Can't get Sales to update employee_id to NULL <br>
-
+- What doesn't: 
 
