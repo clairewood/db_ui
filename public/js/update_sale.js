@@ -23,7 +23,7 @@ updateSaleForm.addEventListener("submit", function (e) {
 
     if (isNaN(employeeIdValue)) 
     {
-        employeeIdValue = NULL
+        employeeIdValue = 'NULL'
     }
 
     // catch NaN
