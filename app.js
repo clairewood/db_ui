@@ -120,6 +120,19 @@ app.get('/sales', function(req, res)
         })
     });
 
+// GET SUPPLIERS
+
+app.get('/suppliers', function(req, res)
+{  
+    let query1 = "SELECT * FROM Suppliers;";               // Define our query
+
+    db.pool.query(query1, function(error, rows, fields){    // Execute the query
+
+        res.render('suppliers', {data: rows});                  // Render the index.hbs file, and also send the renderer
+    })                                                      // an object where 'data' is equal to the 'rows' we
+});   
+
+
 // ITEM CRUD
 
 app.post('/add-item-ajax', function(req, res) 
@@ -252,7 +265,7 @@ app.put('/put-item-ajax', function(req,res,next){
             }
 })});
 
-// SALES CRUD
+// SALES 
 
 app.post('/add-sale-ajax', function(req, res) 
 {
@@ -378,6 +391,49 @@ app.put('/put-sale-ajax', function(req,res,next){
                 }) 
             }
 })});
+
+
+// SUPPLIERS
+
+app.post('/add-supplier-ajax', function(req, res) 
+{
+    // Capture the incoming data and parse it back to a JS object
+    let data = req.body;
+
+    // Create the query and run it on the database
+    query1 = `INSERT INTO Suppliers (supplier_name) VALUES ('${data.supplier_name}')`;
+    db.pool.query(query1, function(error, rows, fields){ 
+
+        // Check to see if there was an error
+        if (error) {
+
+            // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+            console.log(error)
+            res.sendStatus(400);
+        }
+        else
+        {
+            // If there was no error, perform a SELECT * on bsg_people
+            query2 = `SELECT * from Suppliers;`;
+            db.pool.query(query2, function(error, rows, fields){
+
+                // If there was an error on the second query, send a 400
+                if (error) {
+                    
+                    // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+                    console.log(error);
+                    res.sendStatus(400);
+                }
+                // If all went well, send the results of the query back.
+                else
+                {
+                    res.send(rows);
+                }
+            })
+        }
+    })
+});
+
 
 
 /*
