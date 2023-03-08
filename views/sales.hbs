@@ -75,8 +75,8 @@ accessed at this link: https://github.com/osu-cs340-ecampus/nodejs-starter-app -
 <script src="./js/add_sale.js"></script>
 
 
-<h2>Update Sale Employee</h2>
-<p>To update the employee who made the sale, select the employee ID. </p>
+<h2>Update Employee</h2>
+<p>To update the employee who made the sale, select the employee's name. </p>
 <form id="update-sale-form-ajax">
 
     <label for="input-sale_id">Sale ID: </label>
@@ -93,6 +93,7 @@ accessed at this link: https://github.com/osu-cs340-ecampus/nodejs-starter-app -
         {{#each employees}}
         <option value={{this.employee_id}}>{{this.employee_fname}} {{this.employee_lname}}</option> 
         {{/each}}
+        <option value='NULL'>None</option> 
     </select>
 
     <input type="submit">

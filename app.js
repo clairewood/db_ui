@@ -263,12 +263,12 @@ app.post('/add-sale-ajax', function(req, res)
     let customer_id = parseInt(data.customer_id);
     if (isNaN(customer_id))
     {
-        customer_id = 'NULL'
+        customer_id = NULL
     }
     let employee_id = parseInt(data.employee_id);
     if (isNaN(employee_id))
     {
-        employee_id = 'NULL'
+        employee_id = NULL
     }
 
     // Create the query and run it on the database
@@ -337,13 +337,17 @@ app.delete('/delete-sale-ajax/', function(req,res,next){
                       }
                   })
               }
-  })});
+  })}); 
 
 
 app.put('/put-sale-ajax', function(req,res,next){
     let data = req.body;
 
     let employee_id = parseInt(data.employee_id);
+    if (isNaN(employee_id))
+    {
+        employee_id = NULL
+    }
     let sale_id = parseInt(data.sale_id);
 
     let queryUpdateEmployee = `UPDATE Sales SET employee_id = ? WHERE Sales.sale_id = ?`;

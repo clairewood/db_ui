@@ -19,13 +19,14 @@ updateSaleForm.addEventListener("submit", function (e) {
     let saleIdValue = inputSaleID.value;
     let employeeIdValue = inputEmployeeID.value;
     
-    // currently the database table for bsg_people does not allow updating values to NULL
-    // so we must abort if being bassed NULL for homeworld
+    // catch NaN
 
     if (isNaN(employeeIdValue)) 
     {
-        return;
+        employeeIdValue = NULL
     }
+
+    // catch NaN
 
     // Put our data we want to send in a javascript object
     let data = {
@@ -71,7 +72,7 @@ function updateRow(data, sale_id){
             let updateRowIndex = table.getElementsByTagName("tr")[i];
 
             // Get td of homeworld value
-            let td = updateRowIndex.getElementsByTagName("td")[2]; 
+            let td = updateRowIndex.getElementsByTagName("td")[3]; 
             //BROKE EVERYTHING when I changed this from 1 to 3
 
             // Reassign homeworld to our value we updated to
