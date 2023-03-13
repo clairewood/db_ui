@@ -12,7 +12,7 @@ var app = express();
 //app.use(express.json())
 //app.use(express.urlencoded({extended: true}))
 
-PORT = 9381; 
+PORT = 9562; 
 
 // Database
 var db = require('./database/db-connector');
@@ -195,6 +195,31 @@ app.get('/colors', function(req, res)
     })                                                      // an object where 'data' is equal to the 'rows' we
 });   
 
+
+// GET ITEMSSOLD
+
+app.get('/itemssold', function(req, res) {
+    let query1 = "SELECT * FROM ItemsSold;";
+    let query2 = "SELECT * FROM Items";
+    let query3 = "SELECT * FROM Sales";
+  
+    db.pool.query(query1, function(error, rows, fields) {
+      
+        let itemssold = rows;
+  
+      db.pool.query(query3, (error, rows, fields) => {
+        
+        let sales = rows;
+        
+        db.pool.query(query2, (error, rows, fields) => {
+
+          let items = rows;
+  
+          return res.render('itemssold', {data: itemssold, items: items, sales: sales});
+        });
+      });
+    });
+  });
 
 // ITEM CRUD
 
