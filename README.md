@@ -2,12 +2,11 @@
 
 Database UI for Intro the Databases class. <br>
 
-This project was based on a walkthrough provided by our professor and the TAs for the Intro to Databases class, located here: https://github.com/osu-cs340-ecampus/nodejs-starter-app <br>
+This project was based on a walkthrough provided by our professor and the TAs for our CS 340 Intro to Databases class. The walkthrough was accessed at this link:  https://github.com/osu-cs340-ecampus/nodejs-starter-app <br>
 
-LINK to web page: http://flip2.engr.oregonstate.edu:9157/?material_id= <br>
- 
-If getting errors when trying to use node in flip servers, run this: <br>
- --> nvm install 16.0.0 
+LINK to web page running on forever: http://flip1.engr.oregonstate.edu:9562/ <br>
+
+LINK to web page currently being edited: http://flip2.engr.oregonstate.edu:9562/
 
 To load the database with a file: <br>
  - add the source SQL file to database folder <br>

@@ -207,21 +207,22 @@ app.get('/itemssold', function(req, res) {
       
         let itemssold = rows;
   
-      db.pool.query(query3, (error, rows, fields) => {
+        db.pool.query(query3, (error, rows, fields) => {
         
         let sales = rows;
         
-        db.pool.query(query2, (error, rows, fields) => {
+            db.pool.query(query2, (error, rows, fields) => {
 
-          let items = rows;
-  
-          return res.render('itemssold', {data: itemssold, items: items, sales: sales});
+            let items = rows;
+
+            return res.render('itemssold', {data: itemssold, items: items, sales: sales});
+            });
         });
-      });
     });
-  });
+});
 
-// ITEM CRUD
+
+// ADD ITEMS
 
 app.post('/add-item-ajax', function(req, res) 
 {
@@ -286,6 +287,7 @@ LEFT JOIN Suppliers ON Items.supplier_id = Suppliers.supplier_id;`;
     })
 });
 
+// DELETE ITEMS
     
 app.delete('/delete-item-ajax/', function(req,res,next){
     let data = req.body;
@@ -317,6 +319,9 @@ app.delete('/delete-item-ajax/', function(req,res,next){
                   })
               }
   })});
+
+
+// UPDATE ITEMS
 
 app.put('/put-item-ajax', function(req,res,next){
     let data = req.body;
@@ -353,7 +358,7 @@ app.put('/put-item-ajax', function(req,res,next){
             }
 })});
 
-// SALES 
+// ADD SALES 
 
 app.post('/add-sale-ajax', function(req, res) 
 {
@@ -408,6 +413,7 @@ LEFT JOIN Employees ON Sales.employee_id = Employees.employee_id;`;
     })
 });
 
+// DELETE SALE
     
 app.delete('/delete-sale-ajax/', function(req,res,next){
     let data = req.body;
@@ -440,6 +446,8 @@ app.delete('/delete-sale-ajax/', function(req,res,next){
               }
   })}); 
 
+
+// UPDATE SALE
 
 app.put('/put-sale-ajax', function(req,res,next){
     let data = req.body;
@@ -481,7 +489,7 @@ app.put('/put-sale-ajax', function(req,res,next){
 })});
 
 
-// SUPPLIERS
+// ADD SUPPLIERS
 
 app.post('/add-supplier-ajax', function(req, res) 
 {
@@ -523,7 +531,7 @@ app.post('/add-supplier-ajax', function(req, res)
 });
 
 
-// MATERIALS
+// ADD MATERIALS
 
 app.post('/add-material-ajax', function(req, res) 
 {
@@ -565,7 +573,7 @@ app.post('/add-material-ajax', function(req, res)
 });
 
 
-// MATERIALS
+// ADD COLORS
 
 app.post('/add-color-ajax', function(req, res) 
 {
@@ -587,6 +595,61 @@ app.post('/add-color-ajax', function(req, res)
         {
             // If there was no error, perform a SELECT * on bsg_people
             query2 = `SELECT * from Colors;`;
+            db.pool.query(query2, function(error, rows, fields){
+
+                // If there was an error on the second query, send a 400
+                if (error) {
+                    
+                    // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+                    console.log(error);
+                    res.sendStatus(400);
+                }
+                // If all went well, send the results of the query back.
+                else
+                {
+                    res.send(rows);
+                }
+            })
+        }
+    })
+});
+
+// ADD ITEMSSOLD
+
+app.post('/add-itemssold-ajax', function(req, res) 
+{
+    // Capture the incoming data and parse it back to a JS object
+    let data = req.body;
+
+    let item_id = parseInt(data.item_id);
+    if (isNaN(item_id))
+    {
+        item_id = null 
+    }
+    let sale_id = parseInt(data.sale_id);
+    if (isNaN(sale_id))
+    {
+        sale_id = null 
+    }
+    let qty_sold = parseInt(data.qty_sold);
+    if (isNaN(qty_sold))
+    {
+        qty_sold = null 
+    }
+
+    // Create the query and run it on the database
+    query1 = `INSERT INTO ItemsSold (item_id, sale_id, qty_sold) VALUES (${item_id}, ${sale_id}, ${qty_sold})`;
+    db.pool.query(query1, function(error, rows, fields){ 
+
+        if (error) {
+
+            // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+            console.log(error)
+            res.sendStatus(400);
+        }
+        else
+        {
+            query2 = `SELECT * from ItemsSold;`;
             db.pool.query(query2, function(error, rows, fields){
 
                 // If there was an error on the second query, send a 400

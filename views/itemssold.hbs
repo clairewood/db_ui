@@ -1,0 +1,74 @@
+{{! -- Items_Sold - 3
+SELECT, INSERT, DELETE--}}
+
+<h1> Morse Coders DBMS - Craft Store </h1>
+<h2> Items Sold </h2>
+<a href="/">Items</a> | <a href="/customers">NOT Customers</a> |
+<a href="/sales">Sales</a> | <a href="/itemssold">Items Sold</a>
+<br>
+<a href="/materials">Materials</a> | <a href="/colors">Colors</a> |
+<a href="/suppliers">Suppliers</a> | <a href="/employees">NOT Employees</a>
+<br> 
+<br>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+{{!-- Log the data object --}}
+{{log data}}
+
+{{!-- Create a table --}}
+<table id="itemssold-table">
+    {{!-- Header section --}}
+    <thead>
+        <tr>
+            {{#each data.[0]}}
+            <th>
+                {{@key}}
+            </th>
+            {{/each}}
+            <!-- <th>delete</th> --> 
+        </tr>
+    </thead>
+
+    {{!-- Body section --}}
+    <tbody>
+
+        {{!-- For each row, print the id's and qty sold, in order --}}
+        {{#each data}}
+        <tr data-value={{this.id}}>
+            <td>{{this.item_id}}</td>
+            <td>{{this.sale_id}}</td>
+            <td>{{this.qty_sold}}</td>
+           <!-- <td><button onclick="deleteItemSold({{this.id}})">Delete</button></td> -->
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+<!--<script src="./js/delete_item_sold.js"></script>-->
+
+
+<h2>Adding Data with AJAX</h2>
+<p>To add a new sale record, please enter its information below and click 'Submit'!</p>
+<form id="add-itemssold-form-ajax">
+
+    <label for="input-item_id">Item ID: </label>
+    <select name="input-item_id" id="input-item_id">
+        <option value="">Select an Item</option>
+        {{#each items}}
+        <option value={{this.item_id}}>{{this.item_id}}</option>
+        {{/each}}
+    </select>
+
+    <label for="input-sale_id">Sale ID: </label>
+    <select name="input-sale_id" id="input-sale_id">
+        <option value="">Select a Sale</option>
+        {{#each sales}}
+        <option value={{this.sale_id}}>{{this.sale_id}}</option>
+        {{/each}}
+    </select>
+
+    <label for="input-qty_sold">Quantity: </label>
+    <input type="number" name="input-qty_sold" id="input-qty_sold">
+
+    <input type="submit">
+</form>
+<script src="./js/add_itemssold.js"></script>
