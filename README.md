@@ -13,8 +13,8 @@ To load the database with a file: <br>
  - in MariaDB, run: source ./database/filename.sql;
 
 TO DO: <br>
-- Add Employees table? <br>
-- Add ItemsSold table? <br>
+- Add Employees table <br>
+- Finish ItemsSold table -- needs Delete button <br>
 - Fix employee_id and customer_id to show up as fname AND lname in Sales <br>
 - Fix dynamic population issues: <br>
 ---- ITEMS -> materials, colors, in_stock (populate YES or NO instead of 1 or 0) <br>

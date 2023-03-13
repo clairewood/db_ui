@@ -1,9 +1,8 @@
-<!-- index.hbs -->
 <!-- This file was based on the file of the same name/location from the Node.js starter guide 
 accessed at this link: https://github.com/osu-cs340-ecampus/nodejs-starter-app --> 
 
 <h1> Morse Coders DBMS - Craft Store </h1>
-<h2> Suppliers </h2>
+<h2> Customers </h2>
 <a href="/">Items</a> | <a href="/customers">Customers</a> |
 <a href="/sales">Sales</a> | <a href="/itemssold">Items Sold</a>
 <br>
@@ -15,7 +14,7 @@ accessed at this link: https://github.com/osu-cs340-ecampus/nodejs-starter-app -
 
 
 {{!-- Create a table --}}
-<table id="suppliers-table">
+<table id="customers-table">
     {{!-- Header section --}}
     <thead>
         <tr>
@@ -32,23 +31,34 @@ accessed at this link: https://github.com/osu-cs340-ecampus/nodejs-starter-app -
 
         {{!-- For each row, print the id, fname, lname, homeworld and age, in order --}}
         {{#each data}}
-        <tr data-value={{this.supplier_id}}>
-            <td>{{this.supplier_id}}</td>
-            <td>{{this.supplier_name}}</td>
+        <tr data-value={{this.customer_id}}>
+            <td>{{this.customer_id}}</td>
+            <td>{{this.customer_fname}}</td>
+            <td>{{this.customer_lname}}</td>
+            <td>{{this.customer_phone}}</td>
+            <td>{{this.customer_email}}</td>
         </tr>
         {{/each}}
     </tbody>
 </table>
 
 {{!-- Form to add a record to the table  --}}
-<h2>Add a Supplier</h2>
-<p>To add a new supplier, please enter their information below and click 'Submit'!</p>
-<form id="add-supplier-form-ajax">
-    <label for="input-supplier_name">Supplier Name: </label>
-    <input type="text" name="input-supplier_name" id="input-supplier_name">
+<h2>Add a Customer</h2>
+<p>To add a new Customer, please enter their information below and click 'Submit'!</p>
+<form id="add-customer-form-ajax">
+    <label for="input-customer_fname">Customer First Name: </label>
+    <input type="text" name="input-customer_fname" id="input-customer_fname">
+
+    <label for="input-customer_lname">Customer Last Name: </label>
+    <input type="text" name="input-customer_lname" id="input-customer_lname">
+
+    <label for="input-customer_phone">Customer Phone Number: </label>
+    <input type="number" name="input-customer_phone" id="input-customer_phone">
+
+    <label for="input-customer_email">Customer Email: </label>
+    <input type="text" name="input-customer_email" id="input-customer_email">
 
     <input type="submit">
 
 </form>
-<script src="./js/add_supplier.js"></script>
-
+<script src="./js/add_customer.js"></script>

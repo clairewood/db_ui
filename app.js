@@ -221,6 +221,17 @@ app.get('/itemssold', function(req, res) {
     });
 });
 
+// GET CUSTOMERS
+
+app.get('/customers', function(req, res)
+    {let query1 = "SELECT * FROM Customers;"
+
+    db.pool.query(query1, function(error, rows, fields){
+        
+        res.render('customers', {data: rows})
+    })
+});
+
 
 // ADD ITEMS
 
@@ -660,6 +671,42 @@ app.post('/add-itemssold-ajax', function(req, res)
                     res.sendStatus(400);
                 }
                 // If all went well, send the results of the query back.
+                else
+                {
+                    res.send(rows);
+                }
+            })
+        }
+    })
+});
+
+// ADD CUSTOMERS
+
+app.post('/add-customer-ajax', function(req, res) 
+{
+    // Capture the incoming data and parse it back to a JS object
+    let data = req.body;
+
+    // Create the query and run it on the database
+    query1 = `INSERT INTO Customers (customer_fname, customer_lname, customer_phone, customer_email) VALUES ('${data.customer_fname}', '${data.customer_lname}', '${data.customer_phone}', '${data.customer_email}')`;
+    db.pool.query(query1, function(error, rows, fields){ 
+
+        if (error) {
+
+            console.log(error)
+            res.sendStatus(400);
+        }
+        else
+        {
+            // If there was no error, perform a SELECT * on table
+            query2 = `SELECT * from Customers;`;
+            db.pool.query(query2, function(error, rows, fields){
+
+                if (error) {
+                    
+                    console.log(error);
+                    res.sendStatus(400);
+                }
                 else
                 {
                     res.send(rows);
