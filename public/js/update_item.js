@@ -9,7 +9,7 @@ let updateItemForm = document.getElementById('update-item-form-ajax');
 updateItemForm.addEventListener("submit", function (e) {
    
     // Prevent the form from submitting
-    // e.preventDefault(); // CHANGED: Removed this so page would refresh
+    e.preventDefault(); // CHANGED: Removed this so page would refresh
 
     // Get form fields we need to get data from
     let inputItemID = document.getElementById("mySelect");
