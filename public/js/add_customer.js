@@ -9,7 +9,7 @@ let addCustomerForm = document.getElementById('add-customer-form-ajax');
 addCustomerForm.addEventListener("submit", function (e) {
     
     // Prevent the form from submitting
-    //e.preventDefault(); 
+    e.preventDefault(); 
 
     // Get form fields we need to get data from
     let inputFname = document.getElementById("input-customer_fname");

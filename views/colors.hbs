@@ -38,10 +38,14 @@ accessed at this link: https://github.com/osu-cs340-ecampus/nodejs-starter-app -
         {{/each}}
     </tbody>
 </table>
+<p style ="font-style: italic" > 
+ Refresh to see changes:
+ </p>
+ <td><button onclick="window.location.reload();">Refresh</button>
 
 {{!-- Form to add a record to the table  --}}
 <h2>Add a Color</h2>
-<p>To add a new color, please enter a value below and click 'Submit'!</p>
+<p>To add a new color, please enter a value below and click 'Submit'! </p>
 <form id="add-color-form-ajax">
     <label for="input-color_id">Material: </label>
     <input type="text" name="input-color_id" id="input-color_id">
