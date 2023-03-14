@@ -1,9 +1,8 @@
-<!-- index.hbs -->
 <!-- This file was based on the file of the same name/location from the Node.js starter guide 
 accessed at this link: https://github.com/osu-cs340-ecampus/nodejs-starter-app --> 
 
 <h1> Morse Coders DBMS - Craft Store </h1>
-<h2> Colors </h2>
+<h2> Employees </h2>
 <a href="/">Items</a> | <a href="/customers">Customers</a> |
 <a href="/sales">Sales</a> | <a href="/itemssold">Items Sold</a>
 <br>
@@ -15,7 +14,7 @@ accessed at this link: https://github.com/osu-cs340-ecampus/nodejs-starter-app -
 
 
 {{!-- Create a table --}}
-<table id="colors-table">
+<table id="employees-table">
     {{!-- Header section --}}
     <thead>
         <tr>
@@ -32,22 +31,30 @@ accessed at this link: https://github.com/osu-cs340-ecampus/nodejs-starter-app -
 
         {{!-- For each row, print the id, fname, lname, homeworld and age, in order --}}
         {{#each data}}
-        <tr data-value={{this.color_id}}>
-            <td>{{this.color_id}}</td>
+        <tr data-value={{this.employee_id}}>
+            <td>{{this.employee_id}}</td>
+            <td>{{this.employee_fname}}</td>
+            <td>{{this.employee_lname}}</td>
+            <td>{{this.employee_phone}}</td>
         </tr>
         {{/each}}
     </tbody>
 </table>
 
 {{!-- Form to add a record to the table  --}}
-<h2>Add a Color</h2>
-<p>To add a new color, please enter a value below and click 'Submit'!</p>
-<form id="add-color-form-ajax">
-    <label for="input-color_id">Material: </label>
-    <input type="text" name="input-color_id" id="input-color_id">
+<h2>Add an employee</h2>
+<p>To add a new Employee, please fill in ALL fields below and click 'Submit'!</p>
+<form id="add-employee-form-ajax">
+    <label for="input-employee_fname">Employee First Name: </label>
+    <input type="text" name="input-employee_fname" id="input-employee_fname">
+
+    <label for="input-employee_lname">Employee Last Name: </label>
+    <input type="text" name="input-employee_lname" id="input-employee_lname">
+
+    <label for="input-employee_phone">Employee Phone Number: </label>
+    <input type="number" name="input-employee_phone" id="input-employee_phone">
 
     <input type="submit">
 
 </form>
-<script src="./js/add_color.js"></script>
-
+<script src="./js/add_employee.js"></script>

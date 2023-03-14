@@ -25,7 +25,7 @@ SELECT, INSERT, DELETE--}}
                 {{@key}}
             </th>
             {{/each}}
-            <!-- <th>delete</th> --> 
+            <th>delete</th> 
         </tr>
     </thead>
 
@@ -38,16 +38,18 @@ SELECT, INSERT, DELETE--}}
             <td>{{this.item_id}}</td>
             <td>{{this.sale_id}}</td>
             <td>{{this.qty_sold}}</td>
-           <!-- <td><button onclick="deleteItemSold({{this.id}})">Delete</button></td> -->
+           <td><button onclick="deleteItemsSold({{this.item_id}}, {{this.sale_id}})">Delete</button></td>
         </tr>
         {{/each}}
     </tbody>
 </table>
-<!--<script src="./js/delete_item_sold.js"></script>-->
+<script src="./js/delete_itemssold.js"></script>
+<td><button onclick="window.location.reload();">Refresh</button>
+ 
 
 
-<h2>Adding Data with AJAX</h2>
-<p>To add a new sale record, please enter its information below and click 'Submit'!</p>
+<h2>Add a link between Items and Sales </h2>
+<p>To add a a link between Items and Sales, please fill in ALL fields below and click 'Submit'!</p>
 <form id="add-itemssold-form-ajax">
 
     <label for="input-item_id">Item ID: </label>
