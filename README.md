@@ -7,7 +7,7 @@ SOURCES: <br>
 Unless otherwise specified, all files in this project were based on a NodeJS Starter App provided to us by the Oregon State University staff for the CS 340 Intro to Databases class. Contributors to the original starter app, in the form of their github usernames: gkochera (George Kochera), Cortona1, currym-osu, and dmgs11. <br>
 The starter app was accessed on 3/14/2023 (and many times before it) at this link:  https://github.com/osu-cs340-ecampus/nodejs-starter-app <br>
 
-Each table's CRUD operations: <br>
+Each table's CRUD capabilities: <br>
 Items page - Create, Read, Update, Delete, Search <br>
 Sales page - Create, Read, Update, Delete <br>
 ItemsSold page - Create, Read, Delete <br>
