@@ -9,7 +9,7 @@ The starter app was accessed on 3/14/2023 (and many times before it) at this lin
 
 LINK to our running web page (For OSU students/staff only): http://flip2.engr.oregonstate.edu:9562/ <br>
 
-Video of our working website: https://www.youtube.com/watch?v=SHZkeYvQDNk <br>
+Video of our working website: [![Watch the video](https://img.youtube.com/vi/SHZkeYvQDNk/maxresdefault.jpg)](https://www.youtube.com/watch?v=SHZkeYvQDNk)
 
 Database schema for reference:
 ![image](https://user-images.githubusercontent.com/102620776/218896795-dab102ce-df51-41b9-8986-729c9c65736f.png) 
